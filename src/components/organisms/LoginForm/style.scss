@@ -1,5 +1,14 @@
-.form {
+.login-form {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
+
+  &__button {
+    margin-top: 48px;
+    width: 232px;
+  }
+
+  &__input {
+
+  }
 }
