@@ -30,12 +30,6 @@
     },
     "rules": {
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "max-len": [
-            "warn",
-            {
-                "code": 100
-            }
-        ]
+        "react-hooks/exhaustive-deps": "warn"
     }
 }

@@ -1,0 +1,15 @@
+.input {
+  border: 1px solid #B3CDF8;
+  border-radius: 8px;
+  padding: 16px;
+  width: 354px;
+
+  &:focus {
+    border-color: #5C98F1;
+    outline: none;
+  }
+
+  &_errored {
+    border-color: #FB6262;
+  }
+}

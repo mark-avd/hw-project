@@ -1,0 +1,24 @@
+.form-field {
+  display: inline-block;
+  margin-top: 32px;
+  position: relative;
+
+  &__label-text {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 19px;
+  }
+
+  &__error-text {
+    color: #FB6262;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 19px;
+    margin: 4px 0 0 8px;
+    visibility: hidden;
+  }
+
+  &__error-text_active {
+    visibility: visible;
+  }
+}

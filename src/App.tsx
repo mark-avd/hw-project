@@ -1,24 +1,12 @@
 import React from 'react'
-import logo from './logo.svg'
+import LoginForm from './components/organisms/LoginForm'
 import './App.scss'
 
 function App() {
     return (
-        <div className="app">
-            <header className="app-header">
-                <img src={logo} className="app-logo" alt="logo" />
-                <p>Do you like what you see?</p>
-
-                <a
-                    className="app-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <>
+            <LoginForm />
+        </>
     )
 }
 
