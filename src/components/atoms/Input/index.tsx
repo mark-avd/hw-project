@@ -23,16 +23,14 @@ const Input: React.FC<Input> = ({
     })
 
     return (
-        <>
-            <input
-                className={inputClass}
-                id={name}
-                name={name}
-                type={type}
-                value={value}
-                placeholder={placeholder}
-            />
-        </>
+        <input
+            className={inputClass}
+            id={name}
+            name={name}
+            type={type}
+            value={value}
+            placeholder={placeholder}
+        />
     )
 }
 

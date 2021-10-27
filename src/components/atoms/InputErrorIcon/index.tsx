@@ -4,13 +4,11 @@ import './style.scss'
 
 const InputErrorIcon: React.FC = () => {
     return (
-        <>
-            <img
-                className={'input-error-icon'}
-                src={errorIcon}
-                alt="input verification fail icon"
-            />
-        </>
+        <img
+            className={'input-error-icon'}
+            src={errorIcon}
+            alt="input verification fail icon"
+        />
     )
 }
 

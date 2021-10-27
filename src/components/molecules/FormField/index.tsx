@@ -27,14 +27,12 @@ const FormField: React.FC<FormField> = ({
     })
 
     return (
-        <>
-            <label htmlFor={name} className={'form-field'} >
-                <p className={'form-field__label-text'}>{label}</p>
-                <Input isError={isError} name={name} placeholder={placeholder} type={type} />
-                {isError && <InputErrorIcon />}
-                <p className={formFieldErrorClass}>{errorText}</p>
-            </label>
-        </>
+        <label htmlFor={name} className={'form-field'} >
+            <p className={'form-field__label-text'}>{label}</p>
+            <Input isError={isError} name={name} placeholder={placeholder} type={type} />
+            {isError && <InputErrorIcon />}
+            <p className={formFieldErrorClass}>{errorText}</p>
+        </label>
     )
 }
 

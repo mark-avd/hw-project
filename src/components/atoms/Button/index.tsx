@@ -15,17 +15,15 @@ const Button: React.FC<Button> = ({
     isDisabled,
 }) => {
     return (
-        <>
-            <button
-                onClick={onClick}
-                className={'button'}
-                disabled={isDisabled}
-                onDoubleClick={onDoubleClick}
-                type={'submit'}
-            >
-                {buttonText}
-            </button>
-        </>
+        <button
+            onClick={onClick}
+            className={'button'}
+            disabled={isDisabled}
+            onDoubleClick={onDoubleClick}
+            type={'submit'}
+        >
+            {buttonText}
+        </button>
     )
 }
 

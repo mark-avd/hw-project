@@ -1,11 +1,11 @@
 import React from 'react'
-import LoginForm from './components/organisms/LoginForm'
+import LoginPage from './pages/LoginPage'
 import './App.scss'
 
 function App() {
     return (
         <>
-            <LoginForm />
+            <LoginPage />
         </>
     )
 }

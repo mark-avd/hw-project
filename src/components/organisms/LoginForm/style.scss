@@ -2,13 +2,22 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
+  margin-left: 121px;
 
-  &__button {
-    margin-top: 48px;
-    width: 232px;
+  &__heading {
+    margin-top: 16px;
+  }
+
+  &__subheading {
+    margin: 24px 0 48px;
   }
 
   &__input {
+    margin-bottom: 10px;
+  }
 
+  &__button {
+    margin-top: 26px;
+    width: 232px;
   }
 }
