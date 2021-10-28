@@ -1,12 +1,22 @@
 import React from 'react'
-import LoginPage from './pages/LoginPage'
-import ChatPage from './pages/ChatPage'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import routesConfig from './routes/routesConfig'
 import './App.scss'
 
 function App() {
     return (
-        <ChatPage />
-        // <LoginPage />
+        <BrowserRouter>
+            <Switch>
+                {routesConfig.map((route, index) => (
+                    <Route
+                        key={index}
+                        path={route.path}
+                        component={route.component}
+                        exact={route.exact}
+                    />
+                ))}
+            </Switch>
+        </BrowserRouter>
     )
 }
 

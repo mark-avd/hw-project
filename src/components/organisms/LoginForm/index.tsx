@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import Button from '../../atoms/Button'
 import FormInput from '../../molecules/FormField'
-import './style.scss'
 import LogoIcons from '../../atoms/LogoIcons'
 import GreetingText from '../../atoms/GreetingText'
+import { NavLink } from 'react-router-dom'
+import './style.scss'
 
 const LoginForm: React.FC = () => {
     const [isError, setError] = useState<boolean>(false)
     const [isDisabled, setDisabled] = useState<boolean>(false)
     const onClick = (event: React.SyntheticEvent): void => {
-        event.preventDefault()
         setError((prevState) => !prevState)
     }
     const onDoubleClick = (): void => {
@@ -49,12 +49,14 @@ const LoginForm: React.FC = () => {
                     />
                 </div>
                 <div className={'login-form__button'}>
-                    <Button
-                        buttonText={'Log In'}
-                        onClick={onClick}
-                        onDoubleClick={onDoubleClick}
-                        isDisabled={isDisabled}
-                    />
+                    <NavLink to={'/chat'}>
+                        <Button
+                            buttonText={'Log In'}
+                            onClick={onClick}
+                            onDoubleClick={onDoubleClick}
+                            isDisabled={isDisabled}
+                        />
+                    </NavLink>
                 </div>
             </form>
         </div>
