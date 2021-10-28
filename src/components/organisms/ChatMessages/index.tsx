@@ -8,11 +8,10 @@ interface ChatMessage {
     chatId: number
 }
 
-const ChatMessages: React.FC<ChatMessage> = ({chatId}) => {
+const ChatMessages: React.FC<ChatMessage> = ({ chatId }) => {
     return (
         <div className={'chat-messages'}>
-            {chatId !== -1 &&
-                mockMessages[chatId][chatId].map(({ id, text, senderId }) => {
+            {mockMessages[chatId][chatId].map(({ id, text, senderId }) => {
                 const messageAreaClass = classNames({
                     'chat-messages__message-area': true,
                     'chat-messages__message-area_outgoing': senderId === 0,

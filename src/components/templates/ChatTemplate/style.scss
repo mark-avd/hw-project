@@ -8,8 +8,11 @@
   }
 
   &__chat {
+    align-items: center;
     background-image: url("./../../../assets/chat-background.svg");
     background-size: cover;
+    display: flex;
     flex: 3;
+    justify-content: center;
   }
 }

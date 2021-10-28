@@ -2,11 +2,11 @@ import React from 'react'
 import LastSeenMessage from '../../atoms/LastSeenMessage'
 import './style.scss'
 
-interface ChatInterlocutor {
+interface ChatCompanion {
     companionName: string
 }
 
-const ChatInterlocutor: React.FC<ChatInterlocutor> = ({ companionName }) => {
+const ChatCompanion: React.FC<ChatCompanion> = ({ companionName }) => {
     return (
         <div className={'chat-interlocutor'}>
             <h3>{companionName}</h3>
@@ -15,4 +15,4 @@ const ChatInterlocutor: React.FC<ChatInterlocutor> = ({ companionName }) => {
     )
 }
 
-export default ChatInterlocutor
+export default ChatCompanion
