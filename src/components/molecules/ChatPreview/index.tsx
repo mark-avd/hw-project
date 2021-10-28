@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import classNames from 'classnames'
 import UserIcon from '../../atoms/UserIcon'
 import Text2 from '../../atoms/Text2'
@@ -20,10 +20,10 @@ const ChatPreview: React.FC<ChatPreview> = ({
     text,
     name,
     gender,
-    isActive,
     isOutgoing,
     setChatId,
     setCompanionName,
+    isActive,
 }) => {
     const chatPreviewClass = classNames({
         'chat-preview': true,

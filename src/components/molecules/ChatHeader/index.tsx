@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import LogoIcons from '../../atoms/LogoIcons'
 import HeaderProfileIcon from '../../atoms/HeaderProfileIcon'
 import './style.scss'
@@ -6,9 +7,11 @@ import './style.scss'
 const ChatHeader: React.FC = () => {
     return (
         <div className={'chat-header'}>
-            <div className={'chat-header__logo-icons'}>
-                <LogoIcons />
-            </div>
+            <NavLink to={'/'}>
+                <div className={'chat-header__logo-icons'}>
+                    <LogoIcons />
+                </div>
+            </NavLink>
             <div className={'chat-header__profile-icon'}>
                 <HeaderProfileIcon />
             </div>
