@@ -1,0 +1,37 @@
+.chat-preview {
+  align-items: center;
+  background-color: #fff;
+  display: flex;
+  padding: 12px 24px;
+
+  &__user-icon {
+    border-radius: 50%;
+    display: flex;
+    height: 48px;
+    margin-right: 12px;
+  }
+
+  &__user-name {
+    margin-bottom: 4px;
+  }
+
+  &__last-message {
+    display: flex;
+  }
+
+  p {
+    color: #949494;
+  }
+
+  span {
+    color: #5E93E7;
+  }
+
+  &_active {
+    background-color: #5C98F1;
+
+    p, span, h4 {
+      color: #fff;
+    }
+  }
+}

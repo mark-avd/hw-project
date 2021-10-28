@@ -1,0 +1,16 @@
+.chat-input-area {
+  align-items: center;
+  display: flex;
+
+  &__attachment-icon {
+    margin: 0 21px 0 30px;
+  }
+
+  &__input {
+    flex: 1;
+  }
+
+  &__send-icon {
+    margin: 0 25px;
+  }
+}

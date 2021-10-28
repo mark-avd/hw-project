@@ -2,7 +2,11 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 121px;
+
+  &__logo-icons {
+    height: 54px;
+    width: 112px;
+  }
 
   &__heading {
     margin-top: 16px;

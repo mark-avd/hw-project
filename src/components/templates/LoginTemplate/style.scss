@@ -1,0 +1,17 @@
+.login-screen {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
+  &__form {
+    margin-left: 121px;
+  }
+
+  &__background {
+    background-color: #EFF5FF;
+    background-image: url("./../../../assets/login-background.svg");
+    background-size: cover;
+    height: 100vh;
+    width: 50%;
+  }
+}

@@ -1,0 +1,22 @@
+.chat-header {
+    align-items: center;
+    border-bottom: 1px solid #88ABE3;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 24px;
+
+    &__logo-icons {
+        display: flex;
+        height: 32px;
+        justify-content: space-between;
+        object-fit: cover;
+        width: 86px;
+    }
+
+    &__profile-icon {
+        border-radius: 50%;
+        box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.03);
+        height: 48px;
+        padding: 15px;
+    }
+}

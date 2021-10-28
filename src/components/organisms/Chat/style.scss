@@ -1,0 +1,24 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__interlocutor {
+    background-color: #fff;
+    border-bottom: 1px solid #D7E6FF;
+    border-left: 1px solid #88ABE3;
+    padding: 24px;
+  }
+
+  &__messages {
+    background: transparent;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  &__input-area {
+    background-color: #fff;
+    border-left: 1px solid #88ABE3;
+    padding: 14px 0;
+  }
+}

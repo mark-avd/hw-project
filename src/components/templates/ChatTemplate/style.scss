@@ -1,0 +1,15 @@
+.chat-template {
+  display: flex;
+  height: calc(100vh - 80px);
+
+  &__sidebar {
+    flex: 1;
+    min-width: 362px;
+  }
+
+  &__chat {
+    background-image: url("./../../../assets/chat-background.svg");
+    background-size: cover;
+    flex: 3;
+  }
+}

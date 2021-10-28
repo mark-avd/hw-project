@@ -6,7 +6,8 @@ interface Input {
     name: string
     placeholder: string
     type: string
-    isError: boolean
+    isError?: boolean
+    noBorder?: boolean
     value?: string
 }
 
@@ -16,10 +17,12 @@ const Input: React.FC<Input> = ({
     type,
     name,
     isError,
+    noBorder
 }) => {
     const inputClass = classNames({
         input: true,
         input_errored: isError,
+        input_borderless: noBorder
     })
 
     return (

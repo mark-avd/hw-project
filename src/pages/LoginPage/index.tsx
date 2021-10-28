@@ -1,15 +1,12 @@
 import React from 'react'
-import LoginScreen from '../../components/templates/LoginScreen'
 import LoginForm from '../../components/organisms/LoginForm'
-import './style.scss'
+import LoginTemplate from '../../components/templates/LoginTemplate'
 
 const LoginPage: React.FC = () => {
     return (
-        <>
-            <LoginScreen>
-                <LoginForm />
-            </LoginScreen>
-        </>
+        <LoginTemplate>
+            <LoginForm />
+        </LoginTemplate>
     )
 }
 

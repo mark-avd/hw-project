@@ -1,0 +1,8 @@
+.chat-sidebar {
+  display: flex;
+  flex-direction: column;
+
+  &_empty {
+    justify-content: center;
+  }
+}

@@ -19,17 +19,23 @@ const FormField: React.FC<FormField> = ({
     type,
     label,
     errorText,
-    isError
+    isError,
 }) => {
     const formFieldErrorClass = classNames({
         'form-field__error-text': true,
-        'form-field__error-text_active': isError
+        'form-field__error-text_active': isError,
     })
 
     return (
-        <label htmlFor={name} className={'form-field'} >
+        <label htmlFor={name} className={'form-field'}>
             <p className={'form-field__label-text'}>{label}</p>
-            <Input isError={isError} name={name} placeholder={placeholder} type={type} />
+            <Input
+                isError={isError}
+                name={name}
+                placeholder={placeholder}
+                type={type}
+            />
+            {/*//todo move position styles from atom to molecule*/}
             {isError && <InputErrorIcon />}
             <p className={formFieldErrorClass}>{errorText}</p>
         </label>

@@ -1,0 +1,18 @@
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+
+  &__message-area {
+    display: flex;
+    margin: 0 24px;
+    padding: 12px;
+
+    &_incoming {
+      justify-content: left;
+    }
+
+    &_outgoing {
+      justify-content: right;
+    }
+  }
+}

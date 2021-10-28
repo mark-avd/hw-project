@@ -18,7 +18,9 @@ const LoginForm: React.FC = () => {
 
     return (
         <div className={'login-form'}>
-            <LogoIcons />
+            <div className={'login-form__logo-icons'}>
+                <LogoIcons />
+            </div>
             <span className={'login-form__heading'}>
                 <GreetingText />
             </span>
