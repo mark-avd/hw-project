@@ -1,24 +1,31 @@
-import React from 'react'
-import './style.scss'
+import React, { Dispatch, SetStateAction } from 'react'
 import ChatPreview from '../../molecules/ChatPreview'
+import { mockChats } from '../../../mockChats'
+import './style.scss'
 
-const ChatSideBar: React.FC = () => {
+interface ChatSideBar {
+    setChatId: Dispatch<SetStateAction<number>>
+    setCompanionName: Dispatch<SetStateAction<string>>
+    isActive?: boolean
+}
+
+const ChatSideBar: React.FC<ChatSideBar> = ({ setChatId, setCompanionName }) => {
+
     return (
         <div className={'chat-sidebar'}>
-            <ChatPreview
-                name={'Van Darkholme'}
-                text={'I\'ll show you who\'s the boss of this gym.'}
-                gender={'male'}
-                isActive={true}
-                isOutgoing={true}
-            />
-            <ChatPreview
-                name={'Billy Harington'}
-                text={'Hey you!'}
-                gender={'male'}
-                isActive={false}
-                isOutgoing={false}
-            />
+            {mockChats.map(({ name, id }) => (
+                <ChatPreview
+                    key={id}
+                    id={id}
+                    name={name}
+                    text={'I\'ll show you who\'s the boss of this gym.'}
+                    gender={'male'}
+                    isActive={false}
+                    isOutgoing={true}
+                    setChatId={setChatId}
+                    setCompanionName={setCompanionName}
+                />
+            ))}
         </div>
     )
 }

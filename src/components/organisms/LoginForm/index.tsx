@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Button from '../../atoms/Button'
-import FormInput from '../../molecules/FormField'
-import LogoIcons from '../../atoms/LogoIcons'
-import GreetingText from '../../atoms/GreetingText'
+import Button from './../../atoms/Button'
+import FormInput from './../../molecules/FormField'
+import LogoIcons from './../../atoms/LogoIcons'
+import GreetingText from './../../atoms/GreetingText'
 import { NavLink } from 'react-router-dom'
 import './style.scss'
 

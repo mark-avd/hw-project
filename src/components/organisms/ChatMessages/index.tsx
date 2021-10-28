@@ -4,10 +4,15 @@ import Bubble from '../../molecules/Bubble'
 import { mockMessages } from '../../../mockMessages'
 import './style.scss'
 
-const ChatMessages: React.FC = () => {
+interface ChatMessage {
+    chatId: number
+}
+
+const ChatMessages: React.FC<ChatMessage> = ({chatId}) => {
     return (
         <div className={'chat-messages'}>
-            {mockMessages.map(({ id, text, senderId }) => {
+            {chatId !== -1 &&
+                mockMessages[chatId][chatId].map(({ id, text, senderId }) => {
                 const messageAreaClass = classNames({
                     'chat-messages__message-area': true,
                     'chat-messages__message-area_outgoing': senderId === 0,

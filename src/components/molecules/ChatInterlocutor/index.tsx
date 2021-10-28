@@ -2,10 +2,14 @@ import React from 'react'
 import LastSeenMessage from '../../atoms/LastSeenMessage'
 import './style.scss'
 
-const ChatInterlocutor: React.FC = () => {
+interface ChatInterlocutor {
+    companionName: string
+}
+
+const ChatInterlocutor: React.FC<ChatInterlocutor> = ({ companionName }) => {
     return (
         <div className={'chat-interlocutor'}>
-            <h3>Van Darkholme</h3>
+            <h3>{companionName}</h3>
             <LastSeenMessage timePassed={'3 minutes'} />
         </div>
     )

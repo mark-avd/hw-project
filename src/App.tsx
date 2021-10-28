@@ -7,7 +7,7 @@ function App() {
     return (
         <BrowserRouter>
             <Switch>
-                {routesConfig.map((route, index) => (
+                {routesConfig.map((route, index: number) => (
                     <Route
                         key={index}
                         path={route.path}

@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ChatSideBar from '../../organisms/ChatSideBar'
-import './style.scss'
 import Chat from '../../organisms/Chat'
+import './style.scss'
 
 const ChatTemplate: React.FC = () => {
+    const [chatId, setChatId] = useState(0)
+    const [companionName, setCompanionName] = useState('')
+
+
     return (
         <div className={'chat-template'}>
             <div className={'chat-template__sidebar'}>
-                <ChatSideBar />
+                <ChatSideBar setChatId={setChatId} setCompanionName={setCompanionName} />
             </div>
             <div className={'chat-template__chat'}>
-                <Chat />
+                <Chat chatId={chatId} companionName={companionName} />
             </div>
         </div>
     )
