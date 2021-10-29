@@ -4,24 +4,12 @@ import './style.scss'
 interface Button {
     buttonText: string
     isDisabled: boolean
-    onClick: (value: React.MouseEvent) => void
-    onDoubleClick: (value: React.MouseEvent) => void
+    type: 'button' | 'submit' | 'reset' | undefined
 }
 
-const Button: React.FC<Button> = ({
-    buttonText,
-    onClick,
-    onDoubleClick,
-    isDisabled,
-}) => {
+const Button: React.FC<Button> = ({ buttonText, isDisabled, type }) => {
     return (
-        <button
-            onClick={onClick}
-            className={'button'}
-            disabled={isDisabled}
-            onDoubleClick={onDoubleClick}
-            type={'submit'}
-        >
+        <button className={'button'} disabled={isDisabled} type={type}>
             {buttonText}
         </button>
     )

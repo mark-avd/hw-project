@@ -17,12 +17,12 @@ const Input: React.FC<Input> = ({
     type,
     name,
     isError,
-    noBorder
+    noBorder,
 }) => {
     const inputClass = classNames({
         input: true,
         input_errored: isError,
-        input_borderless: noBorder
+        input_borderless: noBorder,
     })
 
     return (

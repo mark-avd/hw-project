@@ -15,3 +15,24 @@
     width: 50%;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .login-screen {
+    position: relative;
+
+    &__form {
+      margin: 0 32px 0 14px;
+      width: 100%;
+    }
+
+    &__background {
+      background-image: url("./../../../assets/login-background-mobile.svg");
+      border-radius: 16px;
+      height: 316px;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: -1;
+    }
+  }
+}
