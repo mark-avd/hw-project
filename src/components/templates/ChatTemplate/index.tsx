@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import ChatSideBar from '../../organisms/ChatSideBar'
 import Chat from '../../organisms/Chat'
 import './style.scss'
 import SelectChatMessage from '../../molecules/SelectChatMessage'
 
-const ChatTemplate: React.FC = () => {
-    const [chatId, setChatId] = useState(-1)
-    const [companionName, setCompanionName] = useState('')
+interface ChatTemplate {
+    chatId: number
+    companionName: string
+    setChatId: Dispatch<SetStateAction<number>>
+    setCompanionName: Dispatch<SetStateAction<string>>
+}
 
+const ChatTemplate: React.FC<ChatTemplate> = ({
+    setChatId,
+    setCompanionName,
+    chatId,
+    companionName,
+}) => {
     return (
         <div className={'chat-template'}>
             <div className={'chat-template__sidebar'}>
