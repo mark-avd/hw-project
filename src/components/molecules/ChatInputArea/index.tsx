@@ -1,14 +1,13 @@
 import React from 'react'
 import Input from '../../atoms/Input'
-import SendIcon from '../../atoms/SendIcon'
+import Icon from '../../atoms/Icon'
 import './style.scss'
-import AttachmentIcon from '../../atoms/AttachmentIcon'
 
 const ChatInputArea: React.FC = () => {
     return (
         <div className={'chat-input-area'}>
             <div className={'chat-input-area__attachment-icon'}>
-                <AttachmentIcon />
+                <Icon type={'attachment'} />
             </div>
             <div className={'chat-input-area__input'}>
                 <Input
@@ -19,7 +18,7 @@ const ChatInputArea: React.FC = () => {
                 />
             </div>
             <div className={'chat-input-area__send-icon'}>
-                <SendIcon />
+                <Icon type={'send-icon'} />
             </div>
         </div>
     )

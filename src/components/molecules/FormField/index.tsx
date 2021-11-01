@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import Input from '../../atoms/Input'
-import InputErrorIcon from '../../atoms/InputErrorIcon'
+import Icon from '../../atoms/Icon'
 import './style.scss'
 
 interface FormField {
@@ -36,7 +36,7 @@ const FormField: React.FC<FormField> = ({
                 type={type}
             />
             {/*//todo move position styles from atom to molecule*/}
-            {isError && <InputErrorIcon />}
+            {isError && <Icon type={'input-error'} />}
             <p className={formFieldErrorClass}>{errorText}</p>
         </label>
     )

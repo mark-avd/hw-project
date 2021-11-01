@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React from 'react'
 import ChatSideBar from '../../organisms/ChatSideBar'
 import Chat from '../../organisms/Chat'
 import './style.scss'
@@ -7,13 +7,11 @@ import SelectChatMessage from '../../molecules/SelectChatMessage'
 interface ChatTemplate {
     chatId: number
     companionName: string
-    setChatId: Dispatch<SetStateAction<number>>
-    setCompanionName: Dispatch<SetStateAction<string>>
+    handleChat: (id: number, name: string) => void
 }
 
 const ChatTemplate: React.FC<ChatTemplate> = ({
-    setChatId,
-    setCompanionName,
+    handleChat,
     chatId,
     companionName,
 }) => {
@@ -21,8 +19,7 @@ const ChatTemplate: React.FC<ChatTemplate> = ({
         <div className={'chat-template'}>
             <div className={'chat-template__sidebar'}>
                 <ChatSideBar
-                    setChatId={setChatId}
-                    setCompanionName={setCompanionName}
+                    handleChat={handleChat}
                 />
             </div>
             <div className={'chat-template__chat'}>

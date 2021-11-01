@@ -1,19 +1,15 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React from 'react'
 import ChatPreview from '../../molecules/ChatPreview'
 import NoChatsMessage from '../../molecules/NoChatsMessage'
 import { mockChats } from '../../../mockChats'
 import './style.scss'
 
 interface ChatSideBar {
-    setChatId: Dispatch<SetStateAction<number>>
-    setCompanionName: Dispatch<SetStateAction<string>>
+    handleChat: (id: number, name: string) => void
     isActive?: boolean
 }
 
-const ChatSideBar: React.FC<ChatSideBar> = ({
-    setChatId,
-    setCompanionName,
-}) => {
+const ChatSideBar: React.FC<ChatSideBar> = ({ handleChat }) => {
     return (
         <div className={'chat-sidebar'}>
             {/*<NoChatsMessage />*/}
@@ -26,8 +22,7 @@ const ChatSideBar: React.FC<ChatSideBar> = ({
                     gender={'male'}
                     isActive={false}
                     isOutgoing={true}
-                    setChatId={setChatId}
-                    setCompanionName={setCompanionName}
+                    handleChat={handleChat}
                 />
             ))}
         </div>

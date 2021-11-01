@@ -1,18 +1,17 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React from 'react'
 import classNames from 'classnames'
-import UserIcon from '../../atoms/UserIcon'
+import Icon from '../../atoms/Icon'
 import Text2 from '../../atoms/Text2'
 import './style.scss'
 
 interface ChatPreview {
+    id: number
     name: string
     text: string
     gender: string
     isActive: boolean
     isOutgoing: boolean
-    setChatId: Dispatch<SetStateAction<number>>
-    setCompanionName: Dispatch<SetStateAction<string>>
-    id: number
+    handleChat: (id: number, name: string) => void
 }
 
 const ChatPreview: React.FC<ChatPreview> = ({
@@ -21,8 +20,7 @@ const ChatPreview: React.FC<ChatPreview> = ({
     name,
     gender,
     isOutgoing,
-    setChatId,
-    setCompanionName,
+    handleChat,
     isActive,
 }) => {
     const chatPreviewClass = classNames({
@@ -38,12 +36,11 @@ const ChatPreview: React.FC<ChatPreview> = ({
         <div
             className={chatPreviewClass}
             onClick={() => {
-                setChatId(id)
-                setCompanionName(name)
+                handleChat(id, name)
             }}
         >
             <div className={'chat-preview__user-icon'}>
-                <UserIcon gender={gender} />
+                <Icon type={'user-male'} />
             </div>
             <div className={'chat-preview__user-info'}>
                 <h4 className={'chat-preview__user-name'}>{name}</h4>
