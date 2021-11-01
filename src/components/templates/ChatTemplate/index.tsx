@@ -1,8 +1,8 @@
 import React from 'react'
-import ChatSideBar from '../../organisms/ChatSideBar'
 import Chat from '../../organisms/Chat'
-import './style.scss'
+import ChatSideBar from '../../organisms/ChatSideBar'
 import SelectChatMessage from '../../molecules/SelectChatMessage'
+import './style.scss'
 
 interface ChatTemplate {
     chatId: number
@@ -20,6 +20,7 @@ const ChatTemplate: React.FC<ChatTemplate> = ({
             <div className={'chat-template__sidebar'}>
                 <ChatSideBar
                     handleChat={handleChat}
+                    chatId={chatId}
                 />
             </div>
             <div className={'chat-template__chat'}>

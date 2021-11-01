@@ -6,22 +6,21 @@ import { mockChats } from '../../../mockChats'
 import './style.scss'
 
 interface ChatSideBar {
+    chatId: number
     handleChat: (id: number, name: string) => void
-    isActive?: boolean
 }
 
-const ChatSideBar: React.FC<ChatSideBar> = ({ handleChat }) => {
+const ChatSideBar: React.FC<ChatSideBar> = ({ handleChat, chatId }) => {
     return (
         <div className={'chat-sidebar'}>
-            {/*<NoChatsMessage />*/}
+            {mockChats.length === 0 && <NoChatsMessage />}
             {mockChats.map(({ name, id }) => (
                 <ChatPreview
                     key={id}
                     id={id}
                     name={name}
+                    chatId={chatId}
                     text={"I'll show you who's the boss of this gym."}
-                    gender={'male'}
-                    isActive={false}
                     isOutgoing={true}
                     handleChat={handleChat}
                 />

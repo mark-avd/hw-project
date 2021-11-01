@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import Icon from '../../atoms/Icon'
 import Text2 from '../../atoms/Text2'
@@ -8,8 +8,7 @@ interface ChatPreview {
     id: number
     name: string
     text: string
-    gender?: string
-    isActive: boolean
+    chatId: number
     isOutgoing: boolean
     handleChat: (id: number, name: string) => void
 }
@@ -18,14 +17,19 @@ const ChatPreview: React.FC<ChatPreview> = ({
     id,
     text,
     name,
+    chatId,
     isOutgoing,
     handleChat,
-    isActive,
 }) => {
+    const [isActive, setActive] = useState<boolean>(false)
     const chatPreviewClass = classNames({
         'chat-preview': true,
         'chat-preview_active': isActive,
     })
+
+    useEffect(() => {
+        chatId === id ? setActive(true) : setActive(false)
+    }, [chatId, id])
 
     if (text.length > 27) {
         text = text.substring(0, 27) + '...'
