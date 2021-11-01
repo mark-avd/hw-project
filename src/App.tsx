@@ -8,12 +8,7 @@ function App() {
         <BrowserRouter>
             <Switch>
                 {routesConfig.map((route, index: number) => (
-                    <Route
-                        key={index}
-                        path={route.path}
-                        component={route.component}
-                        exact={route.exact}
-                    />
+                    <Route key={index} {...route} />
                 ))}
             </Switch>
         </BrowserRouter>

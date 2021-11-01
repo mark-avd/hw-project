@@ -8,6 +8,7 @@ import errorIcon from '../../../assets/error-input-icon.svg'
 import sendIcon from './../../../assets/send-icon.svg'
 import noChatsIcon from '../../../assets/no-chats-icon.svg'
 import profileIcon from './../../../assets/header-profile-icon.svg'
+import './style.scss'
 
 interface Icon {
     type:

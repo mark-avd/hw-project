@@ -1,16 +1,18 @@
 import React from 'react'
 import classNames from 'classnames'
+import { UseFormRegisterReturn } from 'react-hook-form'
 import Input from '../../atoms/Input'
 import Icon from '../../atoms/Icon'
 import './style.scss'
 
 interface FormField {
-    name: string
+    name?: string
     placeholder: string
     type: string
     label: string
-    errorText: string
+    errorText: string | undefined
     isError: boolean
+    register: UseFormRegisterReturn
 }
 
 const FormField: React.FC<FormField> = ({
@@ -20,6 +22,7 @@ const FormField: React.FC<FormField> = ({
     label,
     errorText,
     isError,
+    register
 }) => {
     const formFieldErrorClass = classNames({
         'form-field__error-text': true,
@@ -30,12 +33,11 @@ const FormField: React.FC<FormField> = ({
         <label htmlFor={name} className={'form-field'}>
             <p className={'form-field__label-text'}>{label}</p>
             <Input
+                register={register}
                 isError={isError}
-                name={name}
                 placeholder={placeholder}
                 type={type}
             />
-            {/*//todo move position styles from atom to molecule*/}
             {isError && <Icon type={'input-error'} />}
             <p className={formFieldErrorClass}>{errorText}</p>
         </label>

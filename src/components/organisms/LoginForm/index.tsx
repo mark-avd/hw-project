@@ -1,39 +1,42 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Button from './../../atoms/Button'
 import FormField from './../../molecules/FormField'
 import GreetingText from './../../atoms/GreetingText'
-import Icon from '../../atoms/Icon'
+import Icon from './../../atoms/Icon'
 import './style.scss'
 import * as Yup from 'yup'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { DevTool} from '@hookform/devtools'
+
+
+interface LoginForm {
+    login: string
+    password: string
+}
 
 const LoginForm: React.FC = () => {
-    const [isError, setError] = useState<boolean>(false)
-    const [isDisabled, setDisabled] = useState<boolean>(false)
-    // const validationSchema = Yup.object().shape({
-    //     login: Yup.string()
-    //         .min(2, 'Login must be at least 2 characters')
-    //         .max(16, 'Login must not exceed 16 characters')
-    //         .required('Login is required'),
-    //     password: Yup.string()
-    //         .min(2, 'Password must be at least 2 characters')
-    //         .max(32, 'Password must not exceed 32 characters')
-    //         .required('Password is required'),
-    // })
-    // const {
-    //     register,
-    //     handleSubmit,
-    //     reset,
-    //     formState: { errors },
-    // } = useForm<LoginForm>({ resolver: yupResolver(validationSchema) })
-    // const onSubmit = (data: LoginForm) => {
-    //     console.log(data)
-    // }
-
-    // const login: any = register('login')
-    // const password: any = register('password')
+    const validationSchema = Yup.object().shape({
+        login: Yup.string()
+            .min(2, 'Login must be at least 2 characters')
+            .max(16, 'Login must not exceed 16 characters')
+            .required('Login is required'),
+        password: Yup.string()
+            .min(2, 'Password must be at least 2 characters')
+            .max(32, 'Password must not exceed 32 characters')
+            .required('Password is required'),
+    })
+    const {
+        register,
+        handleSubmit,
+        control,
+        reset,
+        formState: { errors, isValid, isDirty },
+    } = useForm<LoginForm>({ resolver: yupResolver(validationSchema), mode: 'onChange' })
+    const onSubmit: SubmitHandler<LoginForm> = () => {
+        reset()
+    }
 
     return (
         <div className={'login-form'}>
@@ -46,37 +49,40 @@ const LoginForm: React.FC = () => {
             <h2 className={'login-form__subheading'}>
                 Please, authorize yourself
             </h2>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={'login-form__input'}>
                     <FormField
                         name={'login'}
-                        isError={isError}
+                        isError={!isValid && !!errors.login?.message}
                         placeholder={'Input user name'}
                         type={'text'}
                         label={'User name'}
-                        errorText={'Something goes wrong'}
+                        errorText={errors.login?.message}
+                        register={register('login')}
                     />
                 </div>
                 <div className={'login-form__input'}>
                     <FormField
                         name={'password'}
-                        isError={isError}
+                        isError={isValid && !!errors.password?.message}
                         placeholder={'Input password'}
                         type={'password'}
                         label={'Password'}
-                        errorText={'Something goes wrong'}
+                        errorText={errors.password?.message}
+                        register={register('password')}
                     />
                 </div>
                 <div className={'login-form__button'}>
-                    <NavLink to={'/chat'}>
+                    {/*<NavLink to={'/chat'}>*/}
                     <Button
                         type={'submit'}
                         buttonText={'Log In'}
-                        isDisabled={isDisabled}
+                        isDisabled={!isDirty || !isValid}
                     />
-                    </NavLink>
+                    {/*</NavLink>*/}
                 </div>
             </form>
+            <DevTool control={control} />
         </div>
     )
 }

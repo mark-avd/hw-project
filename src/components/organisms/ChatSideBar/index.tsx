@@ -1,5 +1,6 @@
 import React from 'react'
 import ChatPreview from '../../molecules/ChatPreview'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import NoChatsMessage from '../../molecules/NoChatsMessage'
 import { mockChats } from '../../../mockChats'
 import './style.scss'

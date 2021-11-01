@@ -1,14 +1,16 @@
 import React from 'react'
+import {  UseFormRegisterReturn } from 'react-hook-form'
 import classNames from 'classnames'
 import './style.scss'
 
 interface Input {
-    name: string
+    name?: string
     placeholder: string
     type: string
     isError?: boolean
     noBorder?: boolean
     value?: string
+    register?: UseFormRegisterReturn
 }
 
 const Input: React.FC<Input> = ({
@@ -18,6 +20,7 @@ const Input: React.FC<Input> = ({
     name,
     isError,
     noBorder,
+    register,
 }) => {
     const inputClass = classNames({
         input: true,
@@ -33,6 +36,7 @@ const Input: React.FC<Input> = ({
             type={type}
             value={value}
             placeholder={placeholder}
+            {...register}
         />
     )
 }

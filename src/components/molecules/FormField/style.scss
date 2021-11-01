@@ -15,7 +15,8 @@
     font-weight: 500;
     line-height: 19px;
     margin: 4px 0 0 8px;
-    visibility: hidden;
+    min-height: 19px;
+    visibility: visible;
   }
 
   &__error-text_active {
