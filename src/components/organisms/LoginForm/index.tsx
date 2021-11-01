@@ -1,14 +1,13 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import Button from './../../atoms/Button'
-import FormField from './../../molecules/FormField'
-import GreetingText from './../../atoms/GreetingText'
-import Icon from './../../atoms/Icon'
-import './style.scss'
+import React, { useState } from 'react'
 import * as Yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { DevTool} from '@hookform/devtools'
+import { Redirect } from 'react-router-dom'
+import Icon from './../../atoms/Icon'
+import Button from './../../atoms/Button'
+import GreetingText from './../../atoms/GreetingText'
+import FormField from './../../molecules/FormField'
+import './style.scss'
 
 
 interface LoginForm {
@@ -17,6 +16,7 @@ interface LoginForm {
 }
 
 const LoginForm: React.FC = () => {
+    const [isLoggedIn, setLoggedIn] = useState<boolean>(false)
     const validationSchema = Yup.object().shape({
         login: Yup.string()
             .min(2, 'Login must be at least 2 characters')
@@ -30,12 +30,12 @@ const LoginForm: React.FC = () => {
     const {
         register,
         handleSubmit,
-        control,
         reset,
         formState: { errors, isValid, isDirty },
     } = useForm<LoginForm>({ resolver: yupResolver(validationSchema), mode: 'onChange' })
     const onSubmit: SubmitHandler<LoginForm> = () => {
         reset()
+        setLoggedIn(true)
     }
 
     return (
@@ -73,16 +73,14 @@ const LoginForm: React.FC = () => {
                     />
                 </div>
                 <div className={'login-form__button'}>
-                    {/*<NavLink to={'/chat'}>*/}
                     <Button
                         type={'submit'}
                         buttonText={'Log In'}
                         isDisabled={!isDirty || !isValid}
                     />
-                    {/*</NavLink>*/}
                 </div>
             </form>
-            <DevTool control={control} />
+            {isLoggedIn && <Redirect to={'/chat'} />}
         </div>
     )
 }

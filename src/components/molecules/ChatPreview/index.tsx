@@ -8,7 +8,7 @@ interface ChatPreview {
     id: number
     name: string
     text: string
-    gender: string
+    gender?: string
     isActive: boolean
     isOutgoing: boolean
     handleChat: (id: number, name: string) => void
@@ -18,7 +18,6 @@ const ChatPreview: React.FC<ChatPreview> = ({
     id,
     text,
     name,
-    gender,
     isOutgoing,
     handleChat,
     isActive,
