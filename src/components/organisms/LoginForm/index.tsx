@@ -64,7 +64,7 @@ const LoginForm: React.FC = () => {
                 <div className={'login-form__input'}>
                     <FormField
                         name={'password'}
-                        isError={isValid && !!errors.password?.message}
+                        isError={!isValid && !!errors.password?.message}
                         placeholder={'Input password'}
                         type={'password'}
                         label={'Password'}
