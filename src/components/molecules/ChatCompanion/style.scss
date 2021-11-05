@@ -1,4 +1,19 @@
-.chat-interlocutor {
+.chat-companion {
+  display: flex;
+
+  &__mobile {
+    align-items: center;
+    display: flex;
+  }
+
+  &__icon {
+    margin: 0 12px;
+  }
+
+  &__back-icon {
+    cursor: pointer;
+  }
+
   h3 {
     margin-bottom: 4px;
   }

@@ -4,11 +4,15 @@
   height: 100%;
   width: 100%;
 
-  &__interlocutor {
+  &__companion {
     background-color: #fff;
     border-bottom: 1px solid #D7E6FF;
     border-left: 1px solid #88ABE3;
     padding: 24px;
+
+    @media screen and (max-width: 600px) {
+      padding: 16px 2px;
+    }
   }
 
   &__messages {

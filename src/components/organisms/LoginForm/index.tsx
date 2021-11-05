@@ -32,7 +32,10 @@ const LoginForm: React.FC = () => {
         handleSubmit,
         reset,
         formState: { errors, isValid, isDirty },
-    } = useForm<LoginForm>({ resolver: yupResolver(validationSchema), mode: 'onChange' })
+    } = useForm<LoginForm>({
+        resolver: yupResolver(validationSchema),
+        mode: 'onChange',
+    })
     const onSubmit: SubmitHandler<LoginForm> = () => {
         reset()
         setLoggedIn(true)
@@ -43,6 +46,7 @@ const LoginForm: React.FC = () => {
             <div className={'login-form__logo-icons'}>
                 <Icon type={'logo'} />
             </div>
+
             <span className={'login-form__heading'}>
                 <GreetingText />
             </span>

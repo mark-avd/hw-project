@@ -16,3 +16,23 @@
     justify-content: center;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .chat-template {
+    height: 100vh;
+
+    &__sidebar {
+      &_hidden {
+        display: none;
+      }
+    }
+
+    &__chat {
+      display: none;
+
+      &_visible {
+        display: revert;
+      }
+    }
+  }
+}

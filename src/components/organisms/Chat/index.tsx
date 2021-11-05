@@ -7,13 +7,14 @@ import './style.scss'
 interface Chat {
     chatId: number
     companionName: string
+    closeMessages: () => void
 }
 
-const Chat: React.FC<Chat> = ({ chatId, companionName }) => {
+const Chat: React.FC<Chat> = ({ chatId, companionName, closeMessages }) => {
     return (
         <div className={'chat'}>
-            <div className={'chat__interlocutor'}>
-                <ChatCompanion companionName={companionName} />
+            <div className={'chat__companion'}>
+                <ChatCompanion companionName={companionName} closeMessages={closeMessages} />
             </div>
             <div className={'chat__messages'}>
                 <ChatMessages chatId={chatId} />

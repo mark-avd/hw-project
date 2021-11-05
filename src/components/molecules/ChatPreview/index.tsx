@@ -28,7 +28,9 @@ const ChatPreview: React.FC<ChatPreview> = ({
     })
 
     useEffect(() => {
-        chatId === id ? setActive(true) : setActive(false)
+        if (window.innerWidth > 600) {
+            chatId === id ? setActive(true) : setActive(false)
+        }
     }, [chatId, id])
 
     if (text.length > 27) {

@@ -5,9 +5,10 @@ import attachmentIcon from './../../../assets/attachment-icon.svg'
 import maleIcon from '../../../assets/user-icon-male.svg'
 import femaleIcon from '../../../assets/user-icon-female.svg'
 import errorIcon from '../../../assets/error-input-icon.svg'
-import sendIcon from './../../../assets/send-icon.svg'
+import sendIcon from '../../../assets/send-icon.svg'
 import noChatsIcon from '../../../assets/no-chats-icon.svg'
-import profileIcon from './../../../assets/header-profile-icon.svg'
+import profileIcon from '../../../assets/header-profile-icon.svg'
+import arrowBackIcon from '../../../assets/back-arrow-icon.svg'
 import './style.scss'
 
 interface Icon {
@@ -20,6 +21,7 @@ interface Icon {
         | 'send-icon'
         | 'no-chat'
         | 'header-profile-icon'
+        | 'arrow-back-icon'
 }
 
 const Icon: React.FC<Icon> = ({ type }) => {
@@ -54,6 +56,9 @@ const Icon: React.FC<Icon> = ({ type }) => {
                     src={profileIcon}
                     alt={'profile icon'}
                 />
+            )}
+            {type === 'arrow-back-icon' && (
+                <img src={arrowBackIcon} alt="arrow back icon" />
             )}
         </>
     )
