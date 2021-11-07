@@ -1,11 +1,11 @@
-import LoginPage from '../pages/LoginPage'
+import AuthPage from '../pages/AuthPage'
 import ChatPage from '../pages/ChatPage'
 
 const routesConfig = [
     {
         path: '/',
         exact: true,
-        component: LoginPage
+        component: AuthPage
     },
     {
         path: '/chat',

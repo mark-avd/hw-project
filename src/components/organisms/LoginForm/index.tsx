@@ -9,13 +9,18 @@ import GreetingText from './../../atoms/GreetingText'
 import FormField from './../../molecules/FormField'
 import './style.scss'
 
+interface AuthForm {
+    captchaURL: string
+    renderRegisterForm: () => void
+}
 
 interface LoginForm {
     login: string
     password: string
+    captcha: string
 }
 
-const LoginForm: React.FC = () => {
+const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
     const [isLoggedIn, setLoggedIn] = useState<boolean>(false)
     const validationSchema = Yup.object().shape({
         login: Yup.string()
@@ -26,6 +31,10 @@ const LoginForm: React.FC = () => {
             .min(2, 'Password must be at least 2 characters')
             .max(32, 'Password must not exceed 32 characters')
             .required('Password is required'),
+        captcha: Yup.string()
+            .min(5, 'Must be 5 characters')
+            .max(5, 'Must be 5 characters')
+            .required(' '),
     })
     const {
         register,
@@ -46,42 +55,65 @@ const LoginForm: React.FC = () => {
             <div className={'login-form__logo-icons'}>
                 <Icon type={'logo'} />
             </div>
-
             <span className={'login-form__heading'}>
-                <GreetingText />
+                <GreetingText greeting={'Welcome to'} />
             </span>
-            <h2 className={'login-form__subheading'}>
-                Please, authorize yourself
-            </h2>
+            <h2 className={'login-form__subheading'}>Please, authorize yourself</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={'login-form__input'}>
                     <FormField
                         name={'login'}
-                        isError={!isValid && !!errors.login?.message}
                         placeholder={'Input user name'}
                         type={'text'}
                         label={'User name'}
                         errorText={errors.login?.message}
+                        isError={!isValid && !!errors.login?.message}
                         register={register('login')}
                     />
                 </div>
                 <div className={'login-form__input'}>
                     <FormField
                         name={'password'}
-                        isError={!isValid && !!errors.password?.message}
                         placeholder={'Input password'}
                         type={'password'}
                         label={'Password'}
                         errorText={errors.password?.message}
+                        isError={!isValid && !!errors.password?.message}
                         register={register('password')}
                     />
                 </div>
-                <div className={'login-form__button'}>
-                    <Button
-                        type={'submit'}
-                        buttonText={'Log In'}
-                        isDisabled={!isDirty || !isValid}
-                    />
+                <div className={'login-form__input'}>
+                    <div className={'login-form__captcha-input'}>
+                        <FormField
+                            placeholder={'Security code'}
+                            type={'text'}
+                            label={'Security code'}
+                            errorText={errors.captcha?.message}
+                            isError={!isValid && !!errors.captcha?.message}
+                            register={register('captcha')}
+                        />
+                    </div>
+                    <div className={'login-form__captcha-img'}>
+                        <img src={captchaURL} alt="captcha" />
+                    </div>
+                </div>
+                <div className={'login-form__buttons'}>
+                    <div className={'login-form__button'}>
+                        <Button
+                            type={'submit'}
+                            buttonText={'Log In'}
+                            isDisabled={!isDirty || !isValid}
+                        />
+                    </div>
+                    <div className={'login-form__button'}>
+                        <Button
+                            type={'button'}
+                            buttonText={'Registration'}
+                            isPrimary={false}
+                            isDisabled={false}
+                            onClick={renderRegisterForm}
+                        />
+                    </div>
                 </div>
             </form>
             {isLoggedIn && <Redirect to={'/chat'} />}

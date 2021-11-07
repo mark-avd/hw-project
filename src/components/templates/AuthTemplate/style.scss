@@ -1,10 +1,11 @@
-.login-screen {
+.auth {
   align-items: center;
   display: flex;
+  height: 100vh;
   justify-content: space-between;
 
   &__form {
-    margin-left: 121px;
+    padding-left: 121px;
   }
 
   &__background {
@@ -12,17 +13,42 @@
     background-image: url("./../../../assets/login-background.svg");
     background-size: cover;
     height: 100vh;
-    width: 50%;
+    width: 50vw;
+  }
+}
+
+@media screen and (max-height: 900px){
+  .auth {
+    align-items: normal;
+
+    &__form {
+      align-items: center;
+      overflow: auto;
+      padding: 64px 121px;
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: 980px){
+  .auth {
+    &__form {
+      padding-left: 16px;
+    }
   }
 }
 
 @media screen and (max-width: 500px) {
-  .login-screen {
+  .auth {
     position: relative;
 
     &__form {
-      margin: 0 32px 0 14px;
+      margin: 0 14px;
+      padding: 0;
       width: 100%;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     &__background {
