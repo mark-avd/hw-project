@@ -10,6 +10,7 @@ interface ChatTemplate {
     companionName: string
     handleChat: (id: number, name: string) => void
     hideHeader: (hide: boolean) => void
+    users?: []
 }
 
 const ChatTemplate: React.FC<ChatTemplate> = ({
@@ -17,6 +18,7 @@ const ChatTemplate: React.FC<ChatTemplate> = ({
     chatId,
     companionName,
     hideHeader,
+    users
 }) => {
     const [isSideBarHidden, setSideBarHidden] = useState<boolean>(false)
     const [isChatVisible, setChatVisible] = useState<boolean>(false)
@@ -48,7 +50,7 @@ const ChatTemplate: React.FC<ChatTemplate> = ({
     return (
         <div className={'chat-template'}>
             <div className={sideBarClass} onClick={openMessages}>
-                <ChatSideBar handleChat={handleChat} chatId={chatId} />
+                <ChatSideBar handleChat={handleChat} chatId={chatId} users={users} />
             </div>
             <div className={chatClass}>
                 {chatId === -1 ? (

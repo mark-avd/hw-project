@@ -15,13 +15,14 @@ interface Icon {
     type:
         | 'logo'
         | 'attachment'
-        | 'user-male'
-        | 'user-female'
+        | 'male'
+        | 'female'
         | 'input-error'
         | 'send-icon'
         | 'no-chat'
         | 'header-profile-icon'
         | 'arrow-back-icon'
+        | string
 }
 
 const Icon: React.FC<Icon> = ({ type }) => {
@@ -33,11 +34,9 @@ const Icon: React.FC<Icon> = ({ type }) => {
                     <img src={rightIcon} alt="logo icon" />
                 </>
             )}
-            {type === 'attachment' && (
-                <img src={attachmentIcon} alt={'attachment icon'} />
-            )}
-            {type === 'user-male' && <img src={maleIcon} alt="user icon" />}
-            {type === 'user-female' && <img src={femaleIcon} alt="user icon" />}
+            {type === 'attachment' && <img src={attachmentIcon} alt={'attachment icon'} />}
+            {type === 'male' && <img src={maleIcon} alt="user icon" />}
+            {type === 'female' && <img src={femaleIcon} alt="user icon" />}
 
             {type === 'input-error' && (
                 <img
@@ -47,19 +46,11 @@ const Icon: React.FC<Icon> = ({ type }) => {
                 />
             )}
             {type === 'send-icon' && <img src={sendIcon} alt="send icon" />}
-            {type === 'no-chat' && (
-                <img src={noChatsIcon} alt="no chats icon" />
-            )}
+            {type === 'no-chat' && <img src={noChatsIcon} alt="no chats icon" />}
             {type === 'header-profile-icon' && (
-                <img
-                    className={'header-profile-icon'}
-                    src={profileIcon}
-                    alt={'profile icon'}
-                />
+                <img className={'header-profile-icon'} src={profileIcon} alt={'profile icon'} />
             )}
-            {type === 'arrow-back-icon' && (
-                <img src={arrowBackIcon} alt="arrow back icon" />
-            )}
+            {type === 'arrow-back-icon' && <img src={arrowBackIcon} alt="arrow back icon" />}
         </>
     )
 }

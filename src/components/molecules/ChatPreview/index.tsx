@@ -11,6 +11,7 @@ interface ChatPreview {
     chatId: number
     isOutgoing: boolean
     handleChat: (id: number, name: string) => void
+    gender: string
 }
 
 const ChatPreview: React.FC<ChatPreview> = ({
@@ -20,6 +21,7 @@ const ChatPreview: React.FC<ChatPreview> = ({
     chatId,
     isOutgoing,
     handleChat,
+    gender,
 }) => {
     const [isActive, setActive] = useState<boolean>(false)
     const chatPreviewClass = classNames({
@@ -45,7 +47,7 @@ const ChatPreview: React.FC<ChatPreview> = ({
             }}
         >
             <div className={'chat-preview__user-icon'}>
-                <Icon type={'user-male'} />
+                <Icon type={gender} />
             </div>
             <div className={'chat-preview__user-info'}>
                 <h4 className={'chat-preview__user-name'}>{name}</h4>

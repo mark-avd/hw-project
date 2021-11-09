@@ -7,6 +7,8 @@ import Icon from './../../atoms/Icon'
 import Button from './../../atoms/Button'
 import GreetingText from './../../atoms/GreetingText'
 import FormField from './../../molecules/FormField'
+import { AUTH_URL } from '../../../api'
+import { getFormData } from '../../../services'
 import './style.scss'
 
 interface AuthForm {
@@ -38,15 +40,28 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
     const {
         register,
         handleSubmit,
-        reset,
         formState: { errors, isValid, isDirty },
     } = useForm<LoginForm>({
         resolver: yupResolver(validationSchema),
         mode: 'onChange',
     })
-    const onSubmit: SubmitHandler<LoginForm> = () => {
-        reset()
-        setLoggedIn(true)
+    const onSubmit: SubmitHandler<LoginForm> = (data) => {
+        const loginRequest = async (data: FormData, url: string) => {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: data,
+                credentials: 'same-origin',
+            })
+            if (response.status === 200) {
+                const connectKey = await response.text()
+                localStorage.setItem('connect_key', connectKey)
+                setLoggedIn(true)
+            }
+            if (response.status === 400) {
+                console.error(await response.text())
+            }
+        }
+        loginRequest(getFormData(data), AUTH_URL)
     }
 
     return (

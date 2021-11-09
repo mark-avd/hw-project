@@ -4,10 +4,10 @@ import GreetingText from '../../atoms/GreetingText'
 import FormField from '../../molecules/FormField'
 import Button from '../../atoms/Button'
 import * as Yup from 'yup'
-import { SubmitHandler, UnpackNestedValue, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { getFormData } from '../../../services'
-import { fetchData, GENDERS_URL, REGISTRATION_URL } from '../../../api'
+import { GENDERS_URL, postRequest, REGISTRATION_URL } from '../../../api'
 import './style.scss'
 
 interface AuthForm {
@@ -60,22 +60,9 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
     } = useForm<RegisterForm>({
         resolver: yupResolver(validationSchema), mode: 'onTouched',
     })
-    const postRegistration = async (data: FormData) => {
-        const response = await fetch(REGISTRATION_URL, {
-            method: 'POST',
-            body: data,
-            credentials: 'same-origin',
-        })
-        if (response.status === 200) {
-            reset()
-        }
-        if (response.status === 400) {
-            console.log(response.text())
-        }
-    }
 
     const onSubmit: SubmitHandler<RegisterForm> = (data) => {
-        postRegistration(getFormData(data))
+        postRequest(getFormData(data), REGISTRATION_URL, reset)
     }
 
     const [genderList, setGenderList] = useState<[]>([])
