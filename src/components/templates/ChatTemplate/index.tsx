@@ -10,7 +10,7 @@ interface ChatTemplate {
     companionName: string
     handleChat: (id: number, name: string) => void
     hideHeader: (hide: boolean) => void
-    users?: []
+    users: [] | undefined
 }
 
 const ChatTemplate: React.FC<ChatTemplate> = ({

@@ -10,8 +10,8 @@ interface ChatPreview {
     text: string
     chatId: number
     isOutgoing: boolean
-    handleChat: (id: number, name: string) => void
     gender: string
+    handleChat: (id: number, name: string) => void
 }
 
 const ChatPreview: React.FC<ChatPreview> = ({

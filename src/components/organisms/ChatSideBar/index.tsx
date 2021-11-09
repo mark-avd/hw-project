@@ -4,7 +4,7 @@ import NoChatsMessage from '../../molecules/NoChatsMessage'
 import './style.scss'
 
 interface ChatSideBar {
-    users?: []
+    users: [] | undefined
     chatId: number
     handleChat: (id: number, name: string) => void
 }
@@ -13,10 +13,10 @@ const ChatSideBar: React.FC<ChatSideBar> = ({ handleChat, chatId, users }) => {
     return (
         <div className={'chat-sidebar'}>
             {!users && <NoChatsMessage />}
-            {users && users.map(({ name, gender, id }) => (
+            {users && users.map(({ name, gender }, index) => (
                 <ChatPreview
-                    key={id}
-                    id={id}
+                    key={index}
+                    id={index}
                     name={name}
                     gender={gender}
                     chatId={chatId}
