@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Icon from '../../atoms/Icon'
 import GreetingText from '../../atoms/GreetingText'
 import FormField from '../../molecules/FormField'
 import Button from '../../atoms/Button'
-import { Redirect } from 'react-router-dom'
 import * as Yup from 'yup'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, UnpackNestedValue, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { getFormData } from '../../../services'
+import { fetchData, GENDERS_URL, REGISTRATION_URL } from '../../../api'
 import './style.scss'
 
 interface AuthForm {
@@ -32,33 +33,63 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
         password: Yup.string()
             .min(2, 'Password must be at least 2 characters')
             .required('Password is required'),
-        password_confirm: Yup.string().when('password', (password, field) =>
-            password
-                ? field
-                      .required('Password confirmation is required')
-                      .oneOf([Yup.ref('password')], 'Passwords not match')
-                : field
-        ),
-        name: Yup.string().min(2).max(50).required(),
-        gender_id: Yup.number().required(),
+        password_confirm: Yup.string()
+            .required('Password confirmation is required')
+            .when('password', (password, field) =>
+                password
+                    ? field
+                          .required('Password confirmation is required')
+                          .oneOf([Yup.ref('password')], 'Passwords not match')
+                    : field
+            ),
+        name: Yup.string()
+            .min(2, 'Name must be at least 2 characters')
+            .max(50)
+            .required('Name is required'),
+        gender_id: Yup.number().min(1, 'Choose your gender'),
         captcha: Yup.string()
             .min(5, 'Must be 5 characters')
             .max(5, 'Must be 5 characters')
-            .required(' '),
+            .required('Enter captcha'),
     })
     const {
         register,
         handleSubmit,
         reset,
-        formState: { errors, isValid, isDirty },
+        formState: { errors, isValid },
     } = useForm<RegisterForm>({
-        resolver: yupResolver(validationSchema),
-        mode: 'onBlur',
+        resolver: yupResolver(validationSchema), mode: 'onTouched',
     })
-    const onSubmit: SubmitHandler<RegisterForm> = () => {
-        reset()
+    const postRegistration = async (data: FormData) => {
+        const response = await fetch(REGISTRATION_URL, {
+            method: 'POST',
+            body: data,
+            credentials: 'same-origin',
+        })
+        if (response.status === 200) {
+            reset()
+        }
+        if (response.status === 400) {
+            console.log(response.text())
+        }
     }
 
+    const onSubmit: SubmitHandler<RegisterForm> = (data) => {
+        postRegistration(getFormData(data))
+    }
+
+    const [genderList, setGenderList] = useState<[]>([])
+
+    useEffect(() => {
+        const fetchGenders = async (url: string) => {
+            const response = await fetch(url)
+            if (response.ok) {
+                const data = await response.json()
+                setGenderList(data.genders)
+            }
+        }
+        fetchGenders(GENDERS_URL)
+    }, [])
     return (
         <div className={'register-form'}>
             <div className={'register-form__logo-icons'}>
@@ -71,7 +102,6 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={'register-form__input'}>
                     <FormField
-                        name={'login'}
                         placeholder={'Input user name'}
                         type={'text'}
                         label={'Create user name'}
@@ -82,7 +112,6 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
                 </div>
                 <div className={'register-form__input'}>
                     <FormField
-                        name={'password'}
                         placeholder={'Input password'}
                         type={'password'}
                         label={'Create password'}
@@ -93,7 +122,6 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
                 </div>
                 <div className={'register-form__input'}>
                     <FormField
-                        name={'password_confirm'}
                         placeholder={'Password confirmation'}
                         type={'password'}
                         label={'Password confirmation'}
@@ -104,7 +132,6 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
                 </div>
                 <div className={'register-form__input'}>
                     <FormField
-                        name={'name'}
                         placeholder={'Nickname'}
                         type={'text'}
                         label={'Nickname'}
@@ -114,9 +141,15 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
                     />
                 </div>
                 <div className={'register-form__input'}>
-                    <select className={'input'} name="gender_id" id="">
-                        <option value="test">test</option>
-                    </select>
+                    <FormField
+                        placeholder={'Your gender'}
+                        label={'Your gender'}
+                        errorText={errors.gender_id?.message}
+                        isError={!isValid && !!errors.gender_id?.message}
+                        register={register('gender_id')}
+                        select={true}
+                        optionList={genderList}
+                    />
                 </div>
                 <div className={'register-form__input'}>
                     <div className={'register-form__captcha-input'}>
@@ -135,11 +168,7 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
                 </div>
                 <div className={'register-form__buttons'}>
                     <div className={'register-form__button'}>
-                        <Button
-                            type={'submit'}
-                            buttonText={'Register'}
-                            isDisabled={false}
-                        />
+                        <Button type={'submit'} buttonText={'Register'} isDisabled={false} />
                     </div>
                     <div className={'register-form__button'}>
                         <Button

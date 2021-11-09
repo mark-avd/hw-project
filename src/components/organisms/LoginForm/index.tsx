@@ -25,11 +25,10 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
     const validationSchema = Yup.object().shape({
         login: Yup.string()
             .min(2, 'Login must be at least 2 characters')
-            .max(16, 'Login must not exceed 16 characters')
+            .max(50, 'Login must not exceed 50 characters')
             .required('Login is required'),
         password: Yup.string()
             .min(2, 'Password must be at least 2 characters')
-            .max(32, 'Password must not exceed 32 characters')
             .required('Password is required'),
         captcha: Yup.string()
             .min(5, 'Must be 5 characters')
@@ -62,7 +61,6 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={'login-form__input'}>
                     <FormField
-                        name={'login'}
                         placeholder={'Input user name'}
                         type={'text'}
                         label={'User name'}
@@ -73,7 +71,6 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
                 </div>
                 <div className={'login-form__input'}>
                     <FormField
-                        name={'password'}
                         placeholder={'Input password'}
                         type={'password'}
                         label={'Password'}

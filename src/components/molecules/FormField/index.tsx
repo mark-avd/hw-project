@@ -6,13 +6,15 @@ import Icon from '../../atoms/Icon'
 import './style.scss'
 
 interface FormField {
-    name?: string
-    placeholder: string
-    type: string
     label: string
+    placeholder: string
     errorText: string | undefined
     isError: boolean
     register: UseFormRegisterReturn
+    name?: string
+    type?: string
+    select?: boolean
+    optionList?: []
 }
 
 const FormField: React.FC<FormField> = ({
@@ -22,7 +24,9 @@ const FormField: React.FC<FormField> = ({
     label,
     errorText,
     isError,
-    register
+    register,
+    select = false,
+    optionList = [],
 }) => {
     const formFieldErrorClass = classNames({
         'form-field__error-text': true,
@@ -32,13 +36,24 @@ const FormField: React.FC<FormField> = ({
     return (
         <label htmlFor={name} className={'form-field'}>
             <p className={'form-field__label-text'}>{label}</p>
-            <Input
-                register={register}
-                isError={isError}
-                placeholder={placeholder}
-                type={type}
-            />
-            {isError && <Icon type={'input-error'} />}
+            {select ? (
+                <Input
+                    placeholder={placeholder}
+                    isError={isError}
+                    register={register}
+                    optionList={optionList}
+                    select={true}
+                />
+            ) : (
+                <Input
+                    name={name}
+                    type={type}
+                    placeholder={placeholder}
+                    isError={isError}
+                    register={register}
+                />
+            )}
+            {!select && isError && <Icon type={'input-error'} />}
             <p className={formFieldErrorClass}>{errorText}</p>
         </label>
     )
