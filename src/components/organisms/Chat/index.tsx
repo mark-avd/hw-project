@@ -2,11 +2,12 @@ import React from 'react'
 import ChatCompanion from '../../molecules/ChatCompanion'
 import ChatInputArea from '../../molecules/ChatInputArea'
 import ChatMessages from '../ChatMessages'
+import { User } from '../../../utils/types'
 import './style.scss'
 
 interface Chat {
     chatId: number
-    companion: { name: string; gender: string }
+    companion: User
     closeMessages: () => void
 }
 

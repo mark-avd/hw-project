@@ -6,7 +6,7 @@ import './style.scss'
 
 interface ChatSideBar {
     chatId: number
-    users: Array<User>
+    users: Array<User> | []
     handleChat: (id: number, name: string, gender: string) => void
 }
 

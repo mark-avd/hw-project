@@ -1,10 +1,11 @@
 import React from 'react'
 import LastSeenMessage from '../../atoms/LastSeenMessage'
 import Icon from '../../atoms/Icon'
+import { User } from '../../../utils/types'
 import './style.scss'
 
 interface ChatCompanion {
-    companion: { name: string; gender: string }
+    companion: User
     closeMessages: () => void
 }
 

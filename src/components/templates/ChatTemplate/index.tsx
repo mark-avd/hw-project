@@ -10,8 +10,8 @@ interface ChatTemplate {
     chatId: number
     hideHeader: (hide: boolean) => void
     handleChat: (id: number, name: string, gender: string) => void
-    companion: { name: string; gender: string }
-    users: Array<User>
+    companion: User
+    users: Array<User> | []
 }
 
 const ChatTemplate: React.FC<ChatTemplate> = ({
