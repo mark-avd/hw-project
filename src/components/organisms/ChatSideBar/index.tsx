@@ -1,7 +1,7 @@
 import React from 'react'
 import ChatPreview from '../../molecules/ChatPreview'
 import NoChatsMessage from '../../molecules/NoChatsMessage'
-import { User } from '../../../types'
+import { User } from '../../../utils/types'
 import './style.scss'
 
 interface ChatSideBar {

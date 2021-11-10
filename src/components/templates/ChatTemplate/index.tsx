@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import Chat from '../../organisms/Chat'
 import ChatSideBar from '../../organisms/ChatSideBar'
 import SelectChatMessage from '../../molecules/SelectChatMessage'
-import { User } from '../../../types'
+import { User } from '../../../utils/types'
 import './style.scss'
 
 interface ChatTemplate {

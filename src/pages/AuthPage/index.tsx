@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import AuthTemplate from '../../components/templates/AuthTemplate'
 import LoginForm from '../../components/organisms/LoginForm'
 import RegisterForm from '../../components/organisms/RegisterForm'
-import { CAPTCHA_URL } from '../../api'
+import { CAPTCHA_URL } from '../../utils/api'
 
 const AuthPage: React.FC = () => {
     const [registerForm, setRegisterForm] = useState<boolean>(false)

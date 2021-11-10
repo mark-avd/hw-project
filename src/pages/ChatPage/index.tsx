@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import ChatTemplate from '../../components/templates/ChatTemplate'
 import ChatHeader from '../../components/molecules/ChatHeader'
 import { Redirect } from 'react-router-dom'
-import { WS_CONNECTION_URL } from '../../api'
-import { User } from '../../types'
+import { WS_CONNECTION_URL } from '../../utils/api'
+import { User } from '../../utils/types'
 
 const connectKey: string | undefined = localStorage.getItem('connect_key')?.slice(1, -1)
 const websocket = new WebSocket(WS_CONNECTION_URL + '?type=test&ws_id=' + connectKey)
-
 
 const getUsersRequest = {
     type: 'users_list',
