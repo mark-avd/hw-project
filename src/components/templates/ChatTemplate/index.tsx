@@ -3,22 +3,23 @@ import classNames from 'classnames'
 import Chat from '../../organisms/Chat'
 import ChatSideBar from '../../organisms/ChatSideBar'
 import SelectChatMessage from '../../molecules/SelectChatMessage'
+import { User } from '../../../types'
 import './style.scss'
 
 interface ChatTemplate {
     chatId: number
-    companionName: string
-    handleChat: (id: number, name: string) => void
     hideHeader: (hide: boolean) => void
-    users: [] | undefined
+    handleChat: (id: number, name: string, gender: string) => void
+    companion: { name: string; gender: string }
+    users: Array<User>
 }
 
 const ChatTemplate: React.FC<ChatTemplate> = ({
     handleChat,
     chatId,
-    companionName,
+    companion,
     hideHeader,
-    users
+    users,
 }) => {
     const [isSideBarHidden, setSideBarHidden] = useState<boolean>(false)
     const [isChatVisible, setChatVisible] = useState<boolean>(false)
@@ -56,11 +57,7 @@ const ChatTemplate: React.FC<ChatTemplate> = ({
                 {chatId === -1 ? (
                     <SelectChatMessage />
                 ) : (
-                    <Chat
-                        chatId={chatId}
-                        companionName={companionName}
-                        closeMessages={closeMessages}
-                    />
+                    <Chat chatId={chatId} companion={companion} closeMessages={closeMessages} />
                 )}
             </div>
         </div>

@@ -1,14 +1,14 @@
 import React from 'react'
-import classNames from 'classnames'
-import Bubble from '../../molecules/Bubble'
-import { mockMessages } from '../../../mockMessages'
+// import classNames from 'classnames'
+// import Bubble from '../../molecules/Bubble'
+// import { mockMessages } from '../../../mockMessages'
 import './style.scss'
 
 interface ChatMessage {
     chatId: number
 }
 
-const ChatMessages: React.FC<ChatMessage> = ({ chatId }) => {
+const ChatMessages: React.FC<ChatMessage> = () => {
     return (
         <div className={'chat-messages'}>
             {/*{mockMessages[chatId][chatId].map(({ id, text, senderId }) => {*/}

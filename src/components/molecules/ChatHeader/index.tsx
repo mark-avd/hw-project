@@ -3,10 +3,14 @@ import { NavLink } from 'react-router-dom'
 import Icon from './../../atoms/Icon'
 import './style.scss'
 
-const ChatHeader: React.FC = () => {
+interface ChatHeader {
+    closeConnection?: () => void
+}
+
+const ChatHeader: React.FC<ChatHeader> = ({closeConnection}) => {
     return (
         <div className={'chat-header'}>
-            <NavLink to={'/'}>
+            <NavLink to={'/'} onClick={closeConnection}>
                 <div className={'chat-header__logo-icons'}>
                     <Icon type={'logo'} />
                 </div>

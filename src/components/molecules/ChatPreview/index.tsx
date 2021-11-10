@@ -11,7 +11,7 @@ interface ChatPreview {
     chatId: number
     isOutgoing: boolean
     gender: string
-    handleChat: (id: number, name: string) => void
+    handleChat: (id: number, name: string, gender: string) => void
 }
 
 const ChatPreview: React.FC<ChatPreview> = ({
@@ -43,7 +43,7 @@ const ChatPreview: React.FC<ChatPreview> = ({
         <div
             className={chatPreviewClass}
             onClick={() => {
-                handleChat(id, name)
+                handleChat(id, name, gender)
             }}
         >
             <div className={'chat-preview__user-icon'}>

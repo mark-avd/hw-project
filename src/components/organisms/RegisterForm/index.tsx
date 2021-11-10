@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { getFormData } from '../../../services'
-import { GENDERS_URL, postRequest, REGISTRATION_URL } from '../../../api'
+import { GENDERS_URL, REGISTRATION_URL } from '../../../api'
 import './style.scss'
 
 interface AuthForm {
@@ -25,14 +25,15 @@ interface RegisterForm {
 }
 
 const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
+    const [captchaError, setCaptchaError] = useState<string | undefined>()
     const validationSchema = Yup.object().shape({
         login: Yup.string()
+            .required('Login is required')
             .min(2, 'Login must be at least 2 characters')
-            .max(50, 'Login must not exceed 50 characters')
-            .required('Login is required'),
+            .max(50, 'Login must not exceed 50 characters'),
         password: Yup.string()
-            .min(2, 'Password must be at least 2 characters')
-            .required('Password is required'),
+            .required('Password is required')
+            .min(2, 'Password must be at least 2 characters'),
         password_confirm: Yup.string()
             .required('Password confirmation is required')
             .when('password', (password, field) =>
@@ -43,14 +44,14 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
                     : field
             ),
         name: Yup.string()
+            .required('Name is required')
             .min(2, 'Name must be at least 2 characters')
-            .max(50)
-            .required('Name is required'),
+            .max(50),
         gender_id: Yup.number().min(1, 'Choose your gender'),
         captcha: Yup.string()
+            .required('Enter captcha')
             .min(5, 'Must be 5 characters')
-            .max(5, 'Must be 5 characters')
-            .required('Enter captcha'),
+            .max(5, 'Must be 5 characters'),
     })
     const {
         register,
@@ -58,11 +59,29 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
         reset,
         formState: { errors, isValid },
     } = useForm<RegisterForm>({
-        resolver: yupResolver(validationSchema), mode: 'onTouched',
+        resolver: yupResolver(validationSchema),
+        mode: 'onTouched',
     })
 
     const onSubmit: SubmitHandler<RegisterForm> = (data) => {
-        postRequest(getFormData(data), REGISTRATION_URL, reset)
+        const registerRequest = async (data: FormData, url: string) => {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: data,
+                credentials: 'same-origin',
+            })
+            if (response.status === 200) {
+                reset()
+            }
+            if (response.status === 400) {
+                const error = await response.text()
+                console.error(error)
+                if (error === 'Captcha is wrong! Refresh captcha image!') {
+                    setCaptchaError('Captcha is wrong')
+                }
+            }
+        }
+        registerRequest(getFormData(data), REGISTRATION_URL)
     }
 
     const [genderList, setGenderList] = useState<[]>([])
@@ -144,8 +163,11 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
                             placeholder={'Security code'}
                             type={'text'}
                             label={'Security code'}
-                            errorText={errors.captcha?.message}
-                            isError={!isValid && !!errors.captcha?.message}
+                            errorText={errors.captcha?.message || captchaError}
+                            isError={
+                                (!isValid && !!errors.captcha?.message) ||
+                                captchaError !== undefined
+                            }
                             register={register('captcha')}
                         />
                     </div>

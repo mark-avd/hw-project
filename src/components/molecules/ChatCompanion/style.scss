@@ -6,6 +6,12 @@
     display: flex;
   }
 
+  &__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   &__icon {
     margin: 0 12px;
   }

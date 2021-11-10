@@ -24,23 +24,26 @@ interface LoginForm {
 
 const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
     const [isLoggedIn, setLoggedIn] = useState<boolean>(false)
+    const [error, setError] = useState<string | undefined>()
+    const [captchaError, setCaptchaError] = useState<string | undefined>()
     const validationSchema = Yup.object().shape({
         login: Yup.string()
+            .required('Login is required')
             .min(2, 'Login must be at least 2 characters')
-            .max(50, 'Login must not exceed 50 characters')
-            .required('Login is required'),
+            .max(50, 'Login must not exceed 50 characters'),
         password: Yup.string()
-            .min(2, 'Password must be at least 2 characters')
-            .required('Password is required'),
+
+            .required('Password is required')
+            .min(2, 'Password must be at least 2 characters'),
         captcha: Yup.string()
-            .min(5, 'Must be 5 characters')
-            .max(5, 'Must be 5 characters')
-            .required(' '),
+            .required('Enter captcha (12345).')
+            .min(5, '12345')
+            .max(5, 'Must be 5 characters'),
     })
     const {
         register,
         handleSubmit,
-        formState: { errors, isValid, isDirty },
+        formState: { errors, isValid },
     } = useForm<LoginForm>({
         resolver: yupResolver(validationSchema),
         mode: 'onChange',
@@ -58,9 +61,17 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
                 setLoggedIn(true)
             }
             if (response.status === 400) {
-                console.error(await response.text())
+                const error = await response.text()
+                if (error === 'Error on login or password!') {
+                    setError('Wrong login or password')
+                }
+                if (error === 'Captcha is wrong! Refresh captcha image!') {
+                    setCaptchaError('Captcha is wrong')
+                }
             }
         }
+        setError(undefined)
+        setCaptchaError(undefined)
         loginRequest(getFormData(data), AUTH_URL)
     }
 
@@ -79,8 +90,8 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
                         placeholder={'Input user name'}
                         type={'text'}
                         label={'User name'}
-                        errorText={errors.login?.message}
-                        isError={!isValid && !!errors.login?.message}
+                        errorText={errors.login?.message || error}
+                        isError={(!isValid && !!errors.login?.message) || error !== undefined}
                         register={register('login')}
                     />
                 </div>
@@ -89,8 +100,8 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
                         placeholder={'Input password'}
                         type={'password'}
                         label={'Password'}
-                        errorText={errors.password?.message}
-                        isError={!isValid && !!errors.password?.message}
+                        errorText={errors.password?.message || error}
+                        isError={(!isValid && !!errors.password?.message) || error !== undefined}
                         register={register('password')}
                     />
                 </div>
@@ -100,8 +111,11 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
                             placeholder={'Security code'}
                             type={'text'}
                             label={'Security code'}
-                            errorText={errors.captcha?.message}
-                            isError={!isValid && !!errors.captcha?.message}
+                            errorText={errors.captcha?.message || captchaError}
+                            isError={
+                                (!isValid && !!errors.captcha?.message) ||
+                                captchaError !== undefined
+                            }
                             register={register('captcha')}
                         />
                     </div>
@@ -111,11 +125,7 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
                 </div>
                 <div className={'login-form__buttons'}>
                     <div className={'login-form__button'}>
-                        <Button
-                            type={'submit'}
-                            buttonText={'Log In'}
-                            isDisabled={!isDirty || !isValid}
-                        />
+                        <Button type={'submit'} buttonText={'Log In'} isDisabled={false} />
                     </div>
                     <div className={'login-form__button'}>
                         <Button

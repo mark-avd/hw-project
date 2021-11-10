@@ -4,11 +4,11 @@ import Icon from '../../atoms/Icon'
 import './style.scss'
 
 interface ChatCompanion {
-    companionName: string
+    companion: { name: string; gender: string }
     closeMessages: () => void
 }
 
-const ChatCompanion: React.FC<ChatCompanion> = ({ companionName, closeMessages }) => {
+const ChatCompanion: React.FC<ChatCompanion> = ({ companion, closeMessages }) => {
     return (
         <div className={'chat-companion'}>
             {window.innerWidth <= 600 && (
@@ -20,12 +20,12 @@ const ChatCompanion: React.FC<ChatCompanion> = ({ companionName, closeMessages }
                         <Icon type={'arrow-back-icon'} />
                     </span>
                     <span className={'chat-companion__icon'}>
-                        <Icon type={'user-male'} />
+                        <Icon type={companion.gender} />
                     </span>
                 </div>
             )}
             <div className={'chat-companion__main'}>
-                <h3>{companionName}</h3>
+                <h3>{companion.name}</h3>
                 <LastSeenMessage timePassed={'3 minutes'} />
             </div>
         </div>

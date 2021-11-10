@@ -1,49 +1,58 @@
 import React, { useEffect, useState } from 'react'
 import ChatTemplate from '../../components/templates/ChatTemplate'
 import ChatHeader from '../../components/molecules/ChatHeader'
+import { Redirect } from 'react-router-dom'
 import { WS_CONNECTION_URL } from '../../api'
+import { User } from '../../types'
 
-const websocket = new WebSocket(
-    WS_CONNECTION_URL + '?type=test&ws_id=' + localStorage.getItem('connect_key')?.slice(1, -1)
-)
-const getUsersMessage = {
+const connectKey: string | undefined = localStorage.getItem('connect_key')?.slice(1, -1)
+const websocket = new WebSocket(WS_CONNECTION_URL + '?type=test&ws_id=' + connectKey)
+
+
+const getUsersRequest = {
     type: 'users_list',
 }
 
 const ChatPage: React.FC = () => {
-    const [messageData, setMessageData] = useState<any>()
-    const [users, setUsers] = useState<[]>()
+    const [isSignOut, setSignOut] = useState<boolean>(false)
+    const [messageData, setMessageData] = useState<MessageEvent>()
+    const [users, setUsers] = useState<Array<User>>([])
 
     const [chatId, setChatId] = useState<number>(-1)
-    const [companionName, setCompanionName] = useState<string>('')
+    const [companion, setCompanion] = useState<User>({ name: '', gender: '' })
     const [isHeaderHidden, setHeaderHidden] = useState<boolean>(false)
 
     useEffect(() => {
         websocket.onmessage = (msg) => {
-            setMessageData(JSON.parse(msg.data))
+            if (msg.data !== "Get param 'ws_id' - is wrong! Please relogin!") {
+                setMessageData(JSON.parse(msg.data))
+            }
+            if (msg.data === "Get param 'ws_id' - is wrong! Please relogin!") {
+                setSignOut(true)
+                localStorage.removeItem('connect_key')
+            }
         }
         websocket.onopen = () => {
-            console.log('connected')
-            websocket.send(JSON.stringify(getUsersMessage))
+            websocket.send(JSON.stringify(getUsersRequest))
         }
         websocket.onclose = () => {
-            console.log('disconnected')
+            localStorage.removeItem('connect_key')
         }
         websocket.onerror = (msg) => {
-            console.log(msg)
+            console.error(msg)
         }
         if (messageData) {
             if (messageData.type === 'users_list') {
                 setUsers(messageData.data)
-                console.log(users)
             }
         }
     }, [messageData])
 
+    const closeConnection = (): void => websocket.close()
 
-    const handleChat = (id: number, name: string) => {
+    const handleChat = (id: number, name: string, gender: string) => {
         setChatId(id)
-        setCompanionName(name)
+        setCompanion({ name, gender })
     }
     const hideHeader = (hide: boolean) => {
         hide && setHeaderHidden(true)
@@ -51,14 +60,15 @@ const ChatPage: React.FC = () => {
     }
     return (
         <>
-            {!isHeaderHidden && <ChatHeader />}
+            {!isHeaderHidden && <ChatHeader closeConnection={closeConnection} />}
             <ChatTemplate
                 handleChat={handleChat}
-                companionName={companionName}
+                companion={companion}
                 chatId={chatId}
                 hideHeader={hideHeader}
                 users={users}
             />
+            {isSignOut && <Redirect to={'/'} />}
         </>
     )
 }
