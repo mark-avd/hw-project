@@ -1,15 +1,16 @@
 import React from 'react'
+import { observer } from 'mobx-react-lite'
 import LastSeenMessage from '../../atoms/LastSeenMessage'
 import Icon from '../../atoms/Icon'
-import { User } from '../../../utils/types'
+import { store } from '../../../stores/store'
 import './style.scss'
 
 interface ChatCompanion {
-    companion: User
     closeMessages: () => void
 }
 
-const ChatCompanion: React.FC<ChatCompanion> = ({ companion, closeMessages }) => {
+const ChatCompanion: React.FC<ChatCompanion> = ({ closeMessages }) => {
+    const companion = store.person
     return (
         <div className={'chat-companion'}>
             {window.innerWidth <= 600 && (
@@ -18,7 +19,7 @@ const ChatCompanion: React.FC<ChatCompanion> = ({ companion, closeMessages }) =>
                         className={'chat-companion__icon chat-companion__back-icon'}
                         onClick={closeMessages}
                     >
-                        <Icon type={'arrow-back-icon'} />
+                        <Icon type={'arrow-back'} />
                     </span>
                     <span className={'chat-companion__icon'}>
                         <Icon type={companion.gender} />
@@ -33,4 +34,4 @@ const ChatCompanion: React.FC<ChatCompanion> = ({ companion, closeMessages }) =>
     )
 }
 
-export default ChatCompanion
+export default observer(ChatCompanion)

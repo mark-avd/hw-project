@@ -9,6 +9,7 @@ import sendIcon from '../../../assets/send-icon.svg'
 import noChatsIcon from '../../../assets/no-chats-icon.svg'
 import profileIcon from '../../../assets/header-profile-icon.svg'
 import arrowBackIcon from '../../../assets/back-arrow-icon.svg'
+import loadingIcon from '../../../assets/loading-icon.svg'
 import './style.scss'
 
 interface Icon {
@@ -18,10 +19,11 @@ interface Icon {
         | 'male'
         | 'female'
         | 'input-error'
-        | 'send-icon'
+        | 'send'
         | 'no-chat'
-        | 'header-profile-icon'
-        | 'arrow-back-icon'
+        | 'header-profile'
+        | 'arrow-back'
+        | 'loading'
         | string
 }
 
@@ -45,12 +47,13 @@ const Icon: React.FC<Icon> = ({ type }) => {
                     alt="input verification fail icon"
                 />
             )}
-            {type === 'send-icon' && <img src={sendIcon} alt="send icon" />}
+            {type === 'send' && <img src={sendIcon} alt="send icon" />}
             {type === 'no-chat' && <img src={noChatsIcon} alt="no chats icon" />}
-            {type === 'header-profile-icon' && (
-                <img className={'header-profile-icon'} src={profileIcon} alt={'profile icon'} />
+            {type === 'header-profile' && (
+                <img className={'header-profile'} src={profileIcon} alt={'profile icon'} />
             )}
-            {type === 'arrow-back-icon' && <img src={arrowBackIcon} alt="arrow back icon" />}
+            {type === 'arrow-back' && <img src={arrowBackIcon} alt="arrow back icon" />}
+            {type === 'loading' && <img src={loadingIcon} alt='loading icon' />}
         </>
     )
 }

@@ -1,26 +1,20 @@
 import React, { useState } from 'react'
+import { observer } from 'mobx-react-lite'
 import classNames from 'classnames'
+import Icon from '../../atoms/Icon'
 import Chat from '../../organisms/Chat'
+import ChatHeader from '../../molecules/ChatHeader'
 import ChatSideBar from '../../organisms/ChatSideBar'
 import SelectChatMessage from '../../molecules/SelectChatMessage'
-import { User } from '../../../utils/types'
+import { store } from '../../../stores/store'
 import './style.scss'
 
 interface ChatTemplate {
-    chatId: number
-    hideHeader: (hide: boolean) => void
-    handleChat: (id: number, name: string, gender: string) => void
-    companion: User
-    users: Array<User> | []
+    isSuspended?: boolean
 }
 
-const ChatTemplate: React.FC<ChatTemplate> = ({
-    handleChat,
-    chatId,
-    companion,
-    hideHeader,
-    users,
-}) => {
+const ChatTemplate: React.FC<ChatTemplate> = ({ isSuspended = false }) => {
+    const [isHeaderHidden, setHeaderHidden] = useState<boolean>(false)
     const [isSideBarHidden, setSideBarHidden] = useState<boolean>(false)
     const [isChatVisible, setChatVisible] = useState<boolean>(false)
 
@@ -39,7 +33,6 @@ const ChatTemplate: React.FC<ChatTemplate> = ({
             hideHeader(true)
         }
     }
-
     const closeMessages = () => {
         if (window.innerWidth <= 600) {
             setChatVisible(false)
@@ -47,21 +40,34 @@ const ChatTemplate: React.FC<ChatTemplate> = ({
             hideHeader(false)
         }
     }
+    const hideHeader = (hide: boolean) => {
+        hide && setHeaderHidden(true)
+        !hide && setHeaderHidden(false)
+    }
 
     return (
-        <div className={'chat-template'}>
-            <div className={sideBarClass} onClick={openMessages}>
-                <ChatSideBar handleChat={handleChat} chatId={chatId} users={users} />
+        <>
+            {!isHeaderHidden && <ChatHeader />}
+            <div className={'chat-template'}>
+                <div className={sideBarClass} onClick={openMessages}>
+                    {!isSuspended && <ChatSideBar />}
+                </div>
+                <div className={chatClass}>
+                    {isSuspended && (
+                        <div className={'chat-template__chat-loading'}>
+                            <Icon type={'loading'} />
+                        </div>
+                    )}
+                    {!isSuspended &&
+                        (store.chatId === -1 ? (
+                            <SelectChatMessage />
+                        ) : (
+                            <Chat closeMessages={closeMessages} />
+                        ))}
+                </div>
             </div>
-            <div className={chatClass}>
-                {chatId === -1 ? (
-                    <SelectChatMessage />
-                ) : (
-                    <Chat chatId={chatId} companion={companion} closeMessages={closeMessages} />
-                )}
-            </div>
-        </div>
+        </>
     )
 }
 
-export default ChatTemplate
+export default observer(ChatTemplate)

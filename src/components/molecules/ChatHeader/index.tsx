@@ -16,7 +16,7 @@ const ChatHeader: React.FC<ChatHeader> = ({closeConnection}) => {
                 </div>
             </NavLink>
             <div className={'chat-header__profile-icon'}>
-                <Icon type={'header-profile-icon'} />
+                <Icon type={'header-profile'} />
             </div>
         </div>
     )

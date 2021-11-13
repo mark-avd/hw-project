@@ -18,7 +18,7 @@ const ChatInputArea: React.FC = () => {
                 />
             </div>
             <div className={'chat-input-area__send-icon'}>
-                <Icon type={'send-icon'} />
+                <Icon type={'send'} />
             </div>
         </div>
     )

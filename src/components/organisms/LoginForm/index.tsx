@@ -8,7 +8,7 @@ import Button from './../../atoms/Button'
 import GreetingText from './../../atoms/GreetingText'
 import FormField from './../../molecules/FormField'
 import { AUTH_URL } from '../../../utils/api'
-import { getFormData } from '../../../utils/services'
+import { getFormData } from '../../../utils/utils'
 import './style.scss'
 
 interface AuthForm {

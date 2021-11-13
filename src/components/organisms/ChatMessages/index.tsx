@@ -5,7 +5,7 @@ import React from 'react'
 import './style.scss'
 
 interface ChatMessage {
-    chatId: number
+    chatId?: number
 }
 
 const ChatMessages: React.FC<ChatMessage> = () => {

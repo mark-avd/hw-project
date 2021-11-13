@@ -1,16 +1,12 @@
 import React from 'react'
+import { observer } from 'mobx-react-lite'
 import ChatPreview from '../../molecules/ChatPreview'
 import NoChatsMessage from '../../molecules/NoChatsMessage'
-import { User } from '../../../utils/types'
+import { store } from '../../../stores/store'
 import './style.scss'
 
-interface ChatSideBar {
-    chatId: number
-    users: Array<User> | []
-    handleChat: (id: number, name: string, gender: string) => void
-}
-
-const ChatSideBar: React.FC<ChatSideBar> = ({ handleChat, chatId, users }) => {
+const ChatSideBar: React.FC = () => {
+    const users = store.users
     return (
         <div className={'chat-sidebar'}>
             {!users || users.length === 0 ? (
@@ -22,10 +18,9 @@ const ChatSideBar: React.FC<ChatSideBar> = ({ handleChat, chatId, users }) => {
                         id={index}
                         name={name}
                         gender={gender}
-                        chatId={chatId}
+                        chatId={store.chatId}
                         text={"I'll show you who's the boss of this gym."}
                         isOutgoing={true}
-                        handleChat={handleChat}
                     />
                 ))
             )}
@@ -33,4 +28,4 @@ const ChatSideBar: React.FC<ChatSideBar> = ({ handleChat, chatId, users }) => {
     )
 }
 
-export default ChatSideBar
+export default observer(ChatSideBar)

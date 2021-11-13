@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import Icon from '../../atoms/Icon'
 import Text2 from '../../atoms/Text2'
+import { observer } from 'mobx-react-lite'
+import { store } from '../../../stores/store'
 import './style.scss'
 
 interface ChatPreview {
@@ -11,18 +13,9 @@ interface ChatPreview {
     chatId: number
     isOutgoing: boolean
     gender: string
-    handleChat: (id: number, name: string, gender: string) => void
 }
 
-const ChatPreview: React.FC<ChatPreview> = ({
-    id,
-    text,
-    name,
-    chatId,
-    isOutgoing,
-    handleChat,
-    gender,
-}) => {
+const ChatPreview: React.FC<ChatPreview> = ({ id, text, name, chatId, isOutgoing, gender }) => {
     const [isActive, setActive] = useState<boolean>(false)
     const chatPreviewClass = classNames({
         'chat-preview': true,
@@ -43,7 +36,7 @@ const ChatPreview: React.FC<ChatPreview> = ({
         <div
             className={chatPreviewClass}
             onClick={() => {
-                handleChat(id, name, gender)
+                store.openMessages(id, name, gender)
             }}
         >
             <div className={'chat-preview__user-icon'}>
@@ -60,4 +53,4 @@ const ChatPreview: React.FC<ChatPreview> = ({
     )
 }
 
-export default ChatPreview
+export default observer(ChatPreview)

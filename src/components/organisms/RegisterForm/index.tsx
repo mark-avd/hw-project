@@ -6,7 +6,7 @@ import Button from '../../atoms/Button'
 import * as Yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { getFormData } from '../../../utils/services'
+import { getFormData } from '../../../utils/utils'
 import { GENDERS_URL, REGISTRATION_URL } from '../../../utils/api'
 import './style.scss'
 
