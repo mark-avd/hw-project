@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import * as Yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Redirect } from 'react-router-dom'
 import Icon from './../../atoms/Icon'
 import Button from './../../atoms/Button'
 import GreetingText from './../../atoms/GreetingText'
@@ -14,6 +13,7 @@ import './style.scss'
 interface AuthForm {
     captchaURL: string
     renderRegisterForm: () => void
+    handleToken: (token: string) => void
 }
 
 interface LoginForm {
@@ -22,7 +22,7 @@ interface LoginForm {
     captcha: string
 }
 
-const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
+const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm, handleToken }) => {
     const [isLoggedIn, setLoggedIn] = useState<boolean>(false)
     const [error, setError] = useState<string | undefined>()
     const [captchaError, setCaptchaError] = useState<string | undefined>()
@@ -32,7 +32,6 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
             .min(2, 'Login must be at least 2 characters')
             .max(50, 'Login must not exceed 50 characters'),
         password: Yup.string()
-
             .required('Password is required')
             .min(2, 'Password must be at least 2 characters'),
         captcha: Yup.string()
@@ -56,9 +55,8 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
                 credentials: 'same-origin',
             })
             if (response.status === 200) {
-                const connectKey = await response.text()
-                localStorage.setItem('connect_key', connectKey)
-                setLoggedIn(true)
+                const token = await response.text()
+                handleToken(token)
             }
             if (response.status === 400) {
                 const error = await response.text()
@@ -138,7 +136,6 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm }) => {
                     </div>
                 </div>
             </form>
-            {isLoggedIn && <Redirect to={'/chat'} />}
         </div>
     )
 }

@@ -146,7 +146,7 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
                         register={register('name')}
                     />
                 </div>
-                <div className={'register-form__input'}>
+                <div className={'register-form__input register-form__input-gender'}>
                     <FormField
                         placeholder={'Your gender'}
                         label={'Your gender'}

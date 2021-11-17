@@ -25,7 +25,7 @@
     width: 354px;
   }
 
-  &__captcha-input {
+  &__input-gender, &__captcha-input, &__captcha-img, &__button {
     width: 171px;
   }
 
@@ -36,17 +36,12 @@
     justify-content: center;
     margin: 0 0 5px;
     padding: 9px 0;
-    width: 171px;
   }
 
   &__buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 26px;
-  }
-
-  &__button {
-    width: 171px;
   }
 }
 

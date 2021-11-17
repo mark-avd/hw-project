@@ -28,12 +28,13 @@ class Store {
     //todo separate websocket service
 
     websocket() {
-        const connectKey: string | undefined = localStorage.getItem('connect_key')?.slice(1, -1)
-        const path = WS_CONNECTION_URL + '?type=test&ws_id=' + connectKey
+        const token: string | undefined = localStorage.getItem('token')?.slice(1, -1)
+        const path = WS_CONNECTION_URL + '?type=test&ws_id=' + token
         const socketInstance = new WebSocket(path)
 
-        if (this.isSignOut) {
+        if (token === undefined) {
             socketInstance.close()
+            console.log('disconnected')
         }
 
         socketInstance.onopen = () => {
@@ -63,7 +64,7 @@ class Store {
         }
 
         socketInstance.onclose = () => {
-            localStorage.removeItem('connect_key')
+            localStorage.removeItem('token')
         }
     }
 }
