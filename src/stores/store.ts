@@ -6,7 +6,6 @@ class Store {
     person: User = { name: '', gender: '' }
     users: Array<User> = []
     chatId = -1
-    isSignOut = false
 
     constructor() {
         makeAutoObservable(this)
@@ -51,7 +50,6 @@ class Store {
             runInAction(() => {
                 if (eventMessage.data === "Get param 'ws_id' - is wrong! Please relogin!") {
                     localStorage.removeItem('connect_key')
-                    this.isSignOut = true
                 }
                 if (eventMessage.type === 'users_list') {
                     this.users = eventMessage.data

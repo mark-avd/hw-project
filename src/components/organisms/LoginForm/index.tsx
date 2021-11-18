@@ -8,6 +8,7 @@ import GreetingText from './../../atoms/GreetingText'
 import FormField from './../../molecules/FormField'
 import { AUTH_URL } from '../../../utils/api'
 import { getFormData } from '../../../utils/utils'
+import { ILoginForm } from '../../../utils/types'
 import './style.scss'
 
 interface AuthForm {
@@ -16,14 +17,7 @@ interface AuthForm {
     handleToken: (token: string) => void
 }
 
-interface LoginForm {
-    login: string
-    password: string
-    captcha: string
-}
-
 const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm, handleToken }) => {
-    const [isLoggedIn, setLoggedIn] = useState<boolean>(false)
     const [error, setError] = useState<string | undefined>()
     const [captchaError, setCaptchaError] = useState<string | undefined>()
     const validationSchema = Yup.object().shape({
@@ -43,11 +37,11 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm, handleT
         register,
         handleSubmit,
         formState: { errors, isValid },
-    } = useForm<LoginForm>({
+    } = useForm<ILoginForm>({
         resolver: yupResolver(validationSchema),
         mode: 'onChange',
     })
-    const onSubmit: SubmitHandler<LoginForm> = (data) => {
+    const onSubmit: SubmitHandler<ILoginForm> = (data) => {
         const loginRequest = async (data: FormData, url: string) => {
             const response = await fetch(url, {
                 method: 'POST',

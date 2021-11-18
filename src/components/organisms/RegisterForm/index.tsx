@@ -1,27 +1,19 @@
 import React, { useEffect, useState } from 'react'
+import * as Yup from 'yup'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import Icon from '../../atoms/Icon'
 import GreetingText from '../../atoms/GreetingText'
 import FormField from '../../molecules/FormField'
 import Button from '../../atoms/Button'
-import * as Yup from 'yup'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { getFormData } from '../../../utils/utils'
 import { GENDERS_URL, REGISTRATION_URL } from '../../../utils/api'
+import { getFormData } from '../../../utils/utils'
+import { IRegisterForm } from '../../../utils/types'
 import './style.scss'
 
 interface AuthForm {
     captchaURL: string
     renderLoginForm: () => void
-}
-
-interface RegisterForm {
-    login: string
-    password: string
-    password_confirm: string
-    name: string
-    gender_id: number
-    captcha: string
 }
 
 const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
@@ -58,12 +50,12 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
         handleSubmit,
         reset,
         formState: { errors, isValid },
-    } = useForm<RegisterForm>({
+    } = useForm<IRegisterForm>({
         resolver: yupResolver(validationSchema),
         mode: 'onTouched',
     })
 
-    const onSubmit: SubmitHandler<RegisterForm> = (data) => {
+    const onSubmit: SubmitHandler<IRegisterForm> = (data) => {
         const registerRequest = async (data: FormData, url: string) => {
             const response = await fetch(url, {
                 method: 'POST',

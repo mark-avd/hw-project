@@ -10,12 +10,12 @@ interface ChatHeader {
 const ChatHeader: React.FC<ChatHeader> = ({closeConnection}) => {
     return (
         <div className={'chat-header'}>
-            <NavLink to={'/'} onClick={closeConnection}>
+            <NavLink to={'/'}>
                 <div className={'chat-header__logo-icons'}>
                     <Icon type={'logo'} />
                 </div>
             </NavLink>
-            <div className={'chat-header__profile-icon'}>
+            <div className={'chat-header__profile-icon'} onClick={closeConnection}>
                 <Icon type={'header-profile'} />
             </div>
         </div>
