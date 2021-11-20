@@ -20,8 +20,3 @@ export interface MessageInterface {
     senderId: string
     data: string
 }
-
-export interface ChatStorageInterface {
-    chat: string
-    messages: Array<MessageInterface>
-}

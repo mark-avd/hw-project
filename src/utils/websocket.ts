@@ -1,5 +1,5 @@
 import { WS_CONNECTION_URL } from './api'
-import { action, runInAction } from 'mobx'
+import { runInAction } from 'mobx'
 import { store } from '../stores/store'
 
 class WebsocketInstance {
@@ -79,9 +79,6 @@ class WebsocketInstance {
                     if (parsedEventData.type === 'message') {
                         store.messages.push(parsedEventData)
                     }
-                    if (parsedEventData) {
-                        //
-                    }
                 })
 
             }
@@ -95,6 +92,7 @@ class WebsocketInstance {
         this.socketChat?.send(
             `'${ JSON.stringify({ type: 'message', senderId: store.user?.name, data: message })}'`
         )
+        localStorage.setItem('messages', JSON.stringify(store.messages))
     }
 
     websocketSendType(type: string): void {

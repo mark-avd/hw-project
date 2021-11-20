@@ -17,7 +17,6 @@ class Store {
         this.selectedChat = chatId
         this.person = { name, gender }
     }
-
 }
 
 export const store = new Store()

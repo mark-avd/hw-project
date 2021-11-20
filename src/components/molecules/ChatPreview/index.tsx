@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
+import { runInAction } from 'mobx'
+import { observer } from 'mobx-react-lite'
 import Icon from '../../atoms/Icon'
 import Text2 from '../../atoms/Text2'
-import { observer } from 'mobx-react-lite'
 import { store } from '../../../stores/store'
 import { websocketInstance } from '../../../utils/websocket'
 import './style.scss'
@@ -17,13 +18,13 @@ interface ChatPreview {
 }
 
 const ChatPreview: React.FC<ChatPreview> = ({
-    chatId,
-    text,
-    name,
-    selectedChat,
-    isOutgoing,
-    gender,
-}) => {
+                                                chatId,
+                                                text,
+                                                name,
+                                                selectedChat,
+                                                isOutgoing,
+                                                gender,
+                                            }) => {
     const [isActive, setActive] = useState<boolean>(false)
     const chatPreviewClass = classNames({
         'chat-preview': true,
@@ -36,7 +37,7 @@ const ChatPreview: React.FC<ChatPreview> = ({
         }
     }, [selectedChat, chatId])
 
-    if (text.length > 27) {
+    if (text?.length > 27) {
         text = text.substring(0, 27) + '...'
     }
 
@@ -47,6 +48,12 @@ const ChatPreview: React.FC<ChatPreview> = ({
                 store.openMessages(chatId, name, gender)
                 if (!websocketInstance.socketChat) {
                     websocketInstance.chatConnect()
+                }
+                if (localStorage.getItem('messages')) {
+                    const mes = localStorage.getItem('messages')
+                    mes && runInAction( () => {
+                        store.messages = JSON.parse(mes)
+                    })
                 }
             }}
         >
