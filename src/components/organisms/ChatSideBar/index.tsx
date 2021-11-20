@@ -6,23 +6,26 @@ import { store } from '../../../stores/store'
 import './style.scss'
 
 const ChatSideBar: React.FC = () => {
-    const users = store.users
     return (
         <div className={'chat-sidebar'}>
-            {!users || users.length === 0 ? (
+            {!store.users || store.users.length === 0 ? (
                 <NoChatsMessage />
             ) : (
-                users.map(({ name, gender }, index) => (
-                    <ChatPreview
-                        key={index}
-                        id={index}
-                        name={name}
-                        gender={gender}
-                        chatId={store.chatId}
-                        text={"I'll show you who's the boss of this gym."}
-                        isOutgoing={true}
-                    />
-                ))
+                store.users.map(({ name, gender }, index: number) => {
+                    const randomNum: string = Math.floor(Math.random() * 1000).toString()
+                    const key: string = name + randomNum + gender
+                    return (
+                        <ChatPreview
+                            key={key}
+                            chatId={index}
+                            name={name}
+                            gender={gender}
+                            selectedChat={store.selectedChat}
+                            text={"I'll show you who's the boss of this gym."}
+                            isOutgoing={true}
+                        />
+                    )
+                })
             )}
         </div>
     )

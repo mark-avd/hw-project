@@ -7,15 +7,22 @@ import { store } from '../../../stores/store'
 import './style.scss'
 
 interface ChatPreview {
-    id: number
     name: string
-    text: string
-    chatId: number
-    isOutgoing: boolean
     gender: string
+    chatId: number
+    selectedChat: number | undefined
+    text: string
+    isOutgoing: boolean
 }
 
-const ChatPreview: React.FC<ChatPreview> = ({ id, text, name, chatId, isOutgoing, gender }) => {
+const ChatPreview: React.FC<ChatPreview> = ({
+    chatId,
+    text,
+    name,
+    selectedChat,
+    isOutgoing,
+    gender,
+}) => {
     const [isActive, setActive] = useState<boolean>(false)
     const chatPreviewClass = classNames({
         'chat-preview': true,
@@ -24,9 +31,9 @@ const ChatPreview: React.FC<ChatPreview> = ({ id, text, name, chatId, isOutgoing
 
     useEffect(() => {
         if (window.innerWidth > 600) {
-            chatId === id ? setActive(true) : setActive(false)
+            selectedChat === chatId ? setActive(true) : setActive(false)
         }
-    }, [chatId, id])
+    }, [selectedChat, chatId])
 
     if (text.length > 27) {
         text = text.substring(0, 27) + '...'
@@ -36,7 +43,7 @@ const ChatPreview: React.FC<ChatPreview> = ({ id, text, name, chatId, isOutgoing
         <div
             className={chatPreviewClass}
             onClick={() => {
-                store.openMessages(id, name, gender)
+                store.openMessages(chatId, name, gender)
             }}
         >
             <div className={'chat-preview__user-icon'}>

@@ -26,21 +26,21 @@ const ChatTemplate: React.FC<ChatTemplate> = ({ isSuspended = false }) => {
         'chat-template__chat': true,
         'chat-template__chat_visible': isChatVisible,
     })
-    const openMessages = () => {
+    const openMessages = (): void => {
         if (window.innerWidth <= 600) {
             setChatVisible(true)
             setSideBarHidden(true)
             hideHeader(true)
         }
     }
-    const closeMessages = () => {
+    const closeMessages = (): void => {
         if (window.innerWidth <= 600) {
             setChatVisible(false)
             setSideBarHidden(false)
             hideHeader(false)
         }
     }
-    const hideHeader = (hide: boolean) => {
+    const hideHeader = (hide: boolean): void => {
         hide && setHeaderHidden(true)
         !hide && setHeaderHidden(false)
     }
@@ -59,7 +59,7 @@ const ChatTemplate: React.FC<ChatTemplate> = ({ isSuspended = false }) => {
                         </div>
                     )}
                     {!isSuspended &&
-                        (store.chatId === -1 ? (
+                        (!store.person ? (
                             <SelectChatMessage />
                         ) : (
                             <Chat closeMessages={closeMessages} />

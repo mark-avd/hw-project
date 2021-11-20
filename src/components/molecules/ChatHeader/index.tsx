@@ -1,20 +1,18 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import Icon from './../../atoms/Icon'
+import { websocketInstance } from '../../../utils/websocket'
 import './style.scss'
 
-interface ChatHeader {
-    closeConnection?: () => void
-}
-
-const ChatHeader: React.FC<ChatHeader> = ({closeConnection}) => {
+const ChatHeader: React.FC = () => {
+    const closeConnection = () => {
+        websocketInstance.disconnect()
+        localStorage.removeItem('token')
+    }
     return (
         <div className={'chat-header'}>
-            <NavLink to={'/'}>
-                <div className={'chat-header__logo-icons'}>
-                    <Icon type={'logo'} />
-                </div>
-            </NavLink>
+            <div className={'chat-header__logo-icons'}>
+                <Icon type={'logo'} />
+            </div>
             <div className={'chat-header__profile-icon'} onClick={closeConnection}>
                 <Icon type={'header-profile'} />
             </div>

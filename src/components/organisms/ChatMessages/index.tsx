@@ -1,7 +1,6 @@
 import React from 'react'
 // import classNames from 'classnames'
 // import Bubble from '../../molecules/Bubble'
-// import { mockMessages } from '../../../mockMessages'
 import './style.scss'
 
 interface ChatMessage {

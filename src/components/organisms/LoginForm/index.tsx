@@ -8,7 +8,7 @@ import GreetingText from './../../atoms/GreetingText'
 import FormField from './../../molecules/FormField'
 import { AUTH_URL } from '../../../utils/api'
 import { getFormData } from '../../../utils/utils'
-import { ILoginForm } from '../../../utils/types'
+import { LoginFormInterface } from '../../../utils/types'
 import './style.scss'
 
 interface AuthForm {
@@ -37,11 +37,11 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm, handleT
         register,
         handleSubmit,
         formState: { errors, isValid },
-    } = useForm<ILoginForm>({
+    } = useForm<LoginFormInterface>({
         resolver: yupResolver(validationSchema),
         mode: 'onChange',
     })
-    const onSubmit: SubmitHandler<ILoginForm> = (data) => {
+    const onSubmit: SubmitHandler<LoginFormInterface> = (data) => {
         const loginRequest = async (data: FormData, url: string) => {
             const response = await fetch(url, {
                 method: 'POST',

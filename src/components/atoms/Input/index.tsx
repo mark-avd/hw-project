@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 import classNames from 'classnames'
 import './style.scss'
@@ -11,20 +11,20 @@ interface Input {
     type?: string
     isError?: boolean
     noBorder?: boolean
-    value?: string
     register?: UseFormRegisterReturn
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 const Input: React.FC<Input> = ({
-    value,
     placeholder,
     type,
     name,
     isError,
     noBorder,
     register,
-    optionList= [],
+    optionList = [],
     select = false,
+    onChange,
 }) => {
     const inputClass = classNames({
         input: true,
@@ -38,8 +38,8 @@ const Input: React.FC<Input> = ({
             id={name}
             name={name}
             type={type}
-            value={value}
             placeholder={placeholder}
+            onChange={onChange}
             {...register}
         />
     ) : (

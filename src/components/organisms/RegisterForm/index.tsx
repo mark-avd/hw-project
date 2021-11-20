@@ -8,7 +8,7 @@ import FormField from '../../molecules/FormField'
 import Button from '../../atoms/Button'
 import { GENDERS_URL, REGISTRATION_URL } from '../../../utils/api'
 import { getFormData } from '../../../utils/utils'
-import { IRegisterForm } from '../../../utils/types'
+import { RegisterFormInterface } from '../../../utils/types'
 import './style.scss'
 
 interface AuthForm {
@@ -50,12 +50,12 @@ const RegisterForm: React.FC<AuthForm> = ({ captchaURL, renderLoginForm }) => {
         handleSubmit,
         reset,
         formState: { errors, isValid },
-    } = useForm<IRegisterForm>({
+    } = useForm<RegisterFormInterface>({
         resolver: yupResolver(validationSchema),
         mode: 'onTouched',
     })
 
-    const onSubmit: SubmitHandler<IRegisterForm> = (data) => {
+    const onSubmit: SubmitHandler<RegisterFormInterface> = (data) => {
         const registerRequest = async (data: FormData, url: string) => {
             const response = await fetch(url, {
                 method: 'POST',

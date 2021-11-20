@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
-interface useTokenHook {
+interface UseTokenInterface {
     setToken: (userToken: string) => void
     token: string | undefined
 }
 
-const useToken = (): useTokenHook => {
+const useToken = (): UseTokenInterface => {
     const getToken = (): string | undefined => {
         return localStorage.getItem('token')?.slice(1, -1)
     }

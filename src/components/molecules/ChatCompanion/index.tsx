@@ -22,12 +22,12 @@ const ChatCompanion: React.FC<ChatCompanion> = ({ closeMessages }) => {
                         <Icon type={'arrow-back'} />
                     </span>
                     <span className={'chat-companion__icon'}>
-                        <Icon type={companion.gender} />
+                        <Icon type={companion ? companion.gender : 'male'} />
                     </span>
                 </div>
             )}
             <div className={'chat-companion__main'}>
-                <h3>{companion.name}</h3>
+                <h3>{companion?.name}</h3>
                 <LastSeenMessage timePassed={'3 minutes'} />
             </div>
         </div>
