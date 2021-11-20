@@ -18,5 +18,12 @@ export interface RegisterFormInterface extends LoginFormInterface {
 export interface MessageInterface {
     type: 'message'
     senderId: string
-    data: string
+    text: string
+    file: FileType | undefined
+}
+
+export type FileType = {
+    name: string
+    size: number
+    url: string | undefined
 }

@@ -8,7 +8,7 @@ import './style.scss'
 const ChatSideBar: React.FC = () => {
     return (
         <div className={'chat-sidebar'}>
-            {!store.users || store.users.length === 0 ? (
+            {!store.users || store.users.length === 1 ? (
                 <NoChatsMessage />
             ) : (
                 store.users.map(({ name, gender }, index: number) => {

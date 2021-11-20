@@ -1,6 +1,7 @@
+export const BASE_URL = 'http://109.194.37.212:93'
 export const CAPTCHA_URL = 'http://109.194.37.212:93/api/auth/captcha'
 export const GENDERS_URL = 'http://109.194.37.212:93/api/auth/'
 export const AUTH_URL = 'http://109.194.37.212:93/api/auth/login'
 export const REGISTRATION_URL = 'http://109.194.37.212:93/api/auth/register'
-export const WS_CONNECTION_URL = 'ws://109.194.37.212:2346/'
 export const FILE_UPLOAD_URL = 'http://109.194.37.212:93/api/upload'
+export const WS_CONNECTION_URL = 'ws://109.194.37.212:2346/'

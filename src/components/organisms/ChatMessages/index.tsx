@@ -5,14 +5,10 @@ import Bubble from '../../molecules/Bubble'
 import { store } from '../../../stores/store'
 import './style.scss'
 
-interface ChatMessage {
-    chatId?: number
-}
-
-const ChatMessages: React.FC<ChatMessage> = () => {
+const ChatMessages: React.FC = () => {
     return (
         <div className={'chat-messages'}>
-            {store.messages.map(({ data, senderId }) => {
+            {store.messages.map(({ text, senderId, file }) => {
                 const messageAreaClass = classNames({
                     'chat-messages__message-area': true,
                     'chat-messages__message-area_outgoing': senderId === store.user?.name,
@@ -23,7 +19,7 @@ const ChatMessages: React.FC<ChatMessage> = () => {
                 // todo focus on last message through useRef
                 return (
                     <div className={messageAreaClass} key={key}>
-                        <Bubble text={data} isIncoming={senderId === store.person?.name} />
+                        <Bubble text={text} isIncoming={senderId === store.person?.name} file={file} />
                     </div>
                 )
             })}

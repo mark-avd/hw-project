@@ -90,9 +90,12 @@ class WebsocketInstance {
 
     sendMessage(message: string): void {
         this.socketChat?.send(
-            `'${ JSON.stringify({ type: 'message', senderId: store.user?.name, data: message })}'`
+            `'${ JSON.stringify({ type: 'message', senderId: store.user?.name, text: message, file: store.outFile })}'`
         )
         localStorage.setItem('messages', JSON.stringify(store.messages))
+        runInAction(() => {
+            store.outFile = undefined
+        })
     }
 
     websocketSendType(type: string): void {

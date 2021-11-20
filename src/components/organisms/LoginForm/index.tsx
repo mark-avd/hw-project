@@ -69,6 +69,7 @@ const LoginForm: React.FC<AuthForm> = ({ captchaURL, renderRegisterForm, handleT
 
     return (
         <div className={'login-form'}>
+            <div className={'login-form__background-mobile'} />
             <div className={'login-form__logo-icons'}>
                 <Icon type={'logo'} />
             </div>

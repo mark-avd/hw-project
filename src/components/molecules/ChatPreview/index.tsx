@@ -18,13 +18,13 @@ interface ChatPreview {
 }
 
 const ChatPreview: React.FC<ChatPreview> = ({
-                                                chatId,
-                                                text,
-                                                name,
-                                                selectedChat,
-                                                isOutgoing,
-                                                gender,
-                                            }) => {
+    chatId,
+    text,
+    name,
+    selectedChat,
+    isOutgoing,
+    gender,
+}) => {
     const [isActive, setActive] = useState<boolean>(false)
     const chatPreviewClass = classNames({
         'chat-preview': true,
@@ -51,9 +51,10 @@ const ChatPreview: React.FC<ChatPreview> = ({
                 }
                 if (localStorage.getItem('messages')) {
                     const mes = localStorage.getItem('messages')
-                    mes && runInAction( () => {
-                        store.messages = JSON.parse(mes)
-                    })
+                    mes &&
+                        runInAction(() => {
+                            store.messages = JSON.parse(mes)
+                        })
                 }
             }}
         >

@@ -1,12 +1,13 @@
 import { makeAutoObservable } from 'mobx'
-import { MessageInterface, UserType } from '../utils/types'
+import { FileType, MessageInterface, UserType } from '../utils/types'
 
 class Store {
+    selectedChat: number | undefined
     user: UserType | undefined
     person: UserType | undefined
-    users: Array<UserType> = []
-    selectedChat: number | undefined
+    outFile: FileType | undefined
 
+    users: Array<UserType> = []
     messages: Array<MessageInterface> = []
 
     constructor() {
