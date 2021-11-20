@@ -14,17 +14,20 @@ const ChatSideBar: React.FC = () => {
                 store.users.map(({ name, gender }, index: number) => {
                     const randomNum: string = Math.floor(Math.random() * 1000).toString()
                     const key: string = name + randomNum + gender
-                    return (
-                        <ChatPreview
-                            key={key}
-                            chatId={index}
-                            name={name}
-                            gender={gender}
-                            selectedChat={store.selectedChat}
-                            text={"I'll show you who's the boss of this gym."}
-                            isOutgoing={true}
-                        />
-                    )
+                    if (name !== store.user?.name){
+                        return (
+                            <ChatPreview
+                                key={key}
+                                chatId={index}
+                                name={name}
+                                gender={gender}
+                                selectedChat={store.selectedChat}
+                                text={"I'll show you who's the boss of this gym."}
+                                isOutgoing={true}
+                            />
+                        )
+                    }
+
                 })
             )}
         </div>

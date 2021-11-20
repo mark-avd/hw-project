@@ -1,6 +1,8 @@
-import React from 'react'
-// import classNames from 'classnames'
-// import Bubble from '../../molecules/Bubble'
+import React, { useEffect } from 'react'
+import classNames from 'classnames'
+import { observer } from 'mobx-react-lite'
+import Bubble from '../../molecules/Bubble'
+import { store } from '../../../stores/store'
 import './style.scss'
 
 interface ChatMessage {
@@ -10,23 +12,23 @@ interface ChatMessage {
 const ChatMessages: React.FC<ChatMessage> = () => {
     return (
         <div className={'chat-messages'}>
-            {/*{mockMessages[chatId][chatId].map(({ id, text, senderId }) => {*/}
-            {/*    const messageAreaClass = classNames({*/}
-            {/*        'chat-messages__message-area': true,*/}
-            {/*        'chat-messages__message-area_outgoing': senderId === 0,*/}
-            {/*        'chat-messages__message-area_incoming': senderId !== 0,*/}
-            {/*    })*/}
-
-            {/*    // todo focus on last message through useRef*/}
-
-            {/*    return (*/}
-            {/*        <div className={messageAreaClass} key={id}>*/}
-            {/*            <Bubble text={text} isIncoming={senderId !== 0} />*/}
-            {/*        </div>*/}
-            {/*    )*/}
-            {/*})}*/}
+            {store.messages.map(({ data, senderId }) => {
+                const messageAreaClass = classNames({
+                    'chat-messages__message-area': true,
+                    'chat-messages__message-area_outgoing': senderId === store.user?.name,
+                    'chat-messages__message-area_incoming': senderId === store.person?.name,
+                })
+                const randomNum: string = Math.floor(Math.random() * 1000).toString()
+                const key: string = senderId + randomNum
+                // todo focus on last message through useRef
+                return (
+                    <div className={messageAreaClass} key={key}>
+                        <Bubble text={data} isIncoming={senderId === store.person?.name} />
+                    </div>
+                )
+            })}
         </div>
     )
 }
 
-export default ChatMessages
+export default observer(ChatMessages)

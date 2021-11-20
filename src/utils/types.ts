@@ -15,8 +15,13 @@ export interface RegisterFormInterface extends LoginFormInterface {
     gender_id: number
 }
 
-export interface Message {
+export interface MessageInterface {
     type: 'message'
     senderId: string
     data: string
+}
+
+export interface ChatStorageInterface {
+    chat: string
+    messages: Array<MessageInterface>
 }

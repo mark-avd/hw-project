@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { UserType } from '../utils/types'
+import { MessageInterface, UserType } from '../utils/types'
 
 class Store {
     user: UserType | undefined
@@ -7,7 +7,7 @@ class Store {
     users: Array<UserType> = []
     selectedChat: number | undefined
 
-    messages = []
+    messages: Array<MessageInterface> = []
 
     constructor() {
         makeAutoObservable(this)

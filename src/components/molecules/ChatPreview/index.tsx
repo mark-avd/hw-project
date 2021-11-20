@@ -4,6 +4,7 @@ import Icon from '../../atoms/Icon'
 import Text2 from '../../atoms/Text2'
 import { observer } from 'mobx-react-lite'
 import { store } from '../../../stores/store'
+import { websocketInstance } from '../../../utils/websocket'
 import './style.scss'
 
 interface ChatPreview {
@@ -44,6 +45,9 @@ const ChatPreview: React.FC<ChatPreview> = ({
             className={chatPreviewClass}
             onClick={() => {
                 store.openMessages(chatId, name, gender)
+                if (!websocketInstance.socketChat) {
+                    websocketInstance.chatConnect()
+                }
             }}
         >
             <div className={'chat-preview__user-icon'}>
