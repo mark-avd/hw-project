@@ -1,10 +1,10 @@
 import React from 'react'
-import Text from '../../atoms/Text'
 import classNames from 'classnames'
-import './style.scss'
-import { FileType } from '../../../utils/types'
+import Text from '../../atoms/Text'
 import Icon from '../../atoms/Icon'
 import { openInNewTab } from '../../../utils/utils'
+import { FileType } from '../../../utils/types'
+import './style.scss'
 
 interface Bubble {
     text: string

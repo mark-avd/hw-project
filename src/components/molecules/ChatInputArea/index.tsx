@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useRef } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { runInAction } from 'mobx'
 import Input from '../../atoms/Input'
 import Icon from '../../atoms/Icon'
-import { SubmitHandler, useForm } from 'react-hook-form'
 import { websocketInstance } from '../../../utils/websocket'
 import { BASE_URL, FILE_UPLOAD_URL } from '../../../utils/api'
-import './style.scss'
-import { runInAction } from 'mobx'
 import { store } from '../../../stores/store'
+import './style.scss'
 
 interface ChatInputArea {
     text: string
