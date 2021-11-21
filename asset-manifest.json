@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/hw-project/static/css/main.4b40462f.chunk.css",
+    "main.js": "/hw-project/static/js/main.81b38a8f.chunk.js",
+    "main.js.map": "/hw-project/static/js/main.81b38a8f.chunk.js.map",
+    "runtime-main.js": "/hw-project/static/js/runtime-main.af1d47aa.js",
+    "runtime-main.js.map": "/hw-project/static/js/runtime-main.af1d47aa.js.map",
+    "static/js/2.a0268d47.chunk.js": "/hw-project/static/js/2.a0268d47.chunk.js",
+    "static/js/2.a0268d47.chunk.js.map": "/hw-project/static/js/2.a0268d47.chunk.js.map",
+    "static/js/3.9974f318.chunk.js": "/hw-project/static/js/3.9974f318.chunk.js",
+    "static/js/3.9974f318.chunk.js.map": "/hw-project/static/js/3.9974f318.chunk.js.map",
+    "index.html": "/hw-project/index.html",
+    "static/css/main.4b40462f.chunk.css.map": "/hw-project/static/css/main.4b40462f.chunk.css.map",
+    "static/js/2.a0268d47.chunk.js.LICENSE.txt": "/hw-project/static/js/2.a0268d47.chunk.js.LICENSE.txt",
+    "static/media/attachment-icon.60f1c92a.svg": "/hw-project/static/media/attachment-icon.60f1c92a.svg",
+    "static/media/back-arrow-icon.d3fd6ea1.svg": "/hw-project/static/media/back-arrow-icon.d3fd6ea1.svg",
+    "static/media/style.scss": "/hw-project/static/media/login-background.a8ca6968.svg",
+    "static/media/error-input-icon.dd5c433f.svg": "/hw-project/static/media/error-input-icon.dd5c433f.svg",
+    "static/media/file-icon.7ac9e975.svg": "/hw-project/static/media/file-icon.7ac9e975.svg",
+    "static/media/header-profile-icon.ab9333aa.svg": "/hw-project/static/media/header-profile-icon.ab9333aa.svg",
+    "static/media/loading-icon.f6ac7860.svg": "/hw-project/static/media/loading-icon.f6ac7860.svg",
+    "static/media/no-chats-icon.2a176518.svg": "/hw-project/static/media/no-chats-icon.2a176518.svg",
+    "static/media/send-icon.246f991e.svg": "/hw-project/static/media/send-icon.246f991e.svg",
+    "static/media/user-icon-female.d5ca2959.svg": "/hw-project/static/media/user-icon-female.d5ca2959.svg",
+    "static/media/user-icon-male.b2f2a417.svg": "/hw-project/static/media/user-icon-male.b2f2a417.svg",
+    "static/media/vector-left.28b4d8b2.svg": "/hw-project/static/media/vector-left.28b4d8b2.svg",
+    "static/media/vector-right.fe1e5f9a.svg": "/hw-project/static/media/vector-right.fe1e5f9a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.af1d47aa.js",
+    "static/js/2.a0268d47.chunk.js",
+    "static/css/main.4b40462f.chunk.css",
+    "static/js/main.81b38a8f.chunk.js"
+  ]
+}
