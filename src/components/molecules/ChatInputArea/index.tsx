@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, useRef } from 'react'
 import Input from '../../atoms/Input'
 import Icon from '../../atoms/Icon'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -16,13 +16,6 @@ interface ChatInputArea {
 const ChatInputArea: React.FC = () => {
     const hiddenFileInput = useRef<HTMLInputElement>(null)
     const { register, handleSubmit, reset } = useForm<ChatInputArea>()
-    const handleSend: SubmitHandler<ChatInputArea> = (data) => {
-        if (data.text === '') {
-            return false
-        }
-        websocketInstance.sendMessage(data.text)
-        reset()
-    }
 
     const fileInputClick = () => {
         hiddenFileInput.current?.click()
@@ -44,7 +37,7 @@ const ChatInputArea: React.FC = () => {
                     store.outFile = {
                         name: file.name,
                         size: file.size,
-                        url: BASE_URL + fileUrl
+                        url: BASE_URL + fileUrl,
                     }
                 })
             }
@@ -53,6 +46,14 @@ const ChatInputArea: React.FC = () => {
                 console.error(error)
             }
         }
+    }
+
+    const handleSend: SubmitHandler<ChatInputArea> = (data) => {
+        if (data.text === '') {
+            return false
+        }
+        websocketInstance.sendMessage(data.text)
+        reset()
     }
 
     return (

@@ -1,5 +1,7 @@
 .bubble {
   border: 1px solid #D7E6FF;
+  display: flex;
+  flex-direction: column;
   position: relative;
 
   &_incoming {
@@ -48,5 +50,22 @@
 
   &__text {
     padding: 12px 14px;
+  }
+
+  &__file {
+    cursor: pointer;
+    display: flex;
+    padding: 0 14px 12px;
+  }
+
+  &__file-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+  }
+
+  &__file-name {
+    font-weight: 600;
+    margin-bottom: 2px;
   }
 }

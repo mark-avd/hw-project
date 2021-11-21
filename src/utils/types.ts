@@ -19,7 +19,8 @@ export interface MessageInterface {
     type: 'message'
     senderId: string
     text: string
-    file: FileType | undefined
+    date: Date
+    file?: FileType
 }
 
 export type FileType = {

@@ -12,9 +12,8 @@ const ChatSideBar: React.FC = () => {
                 <NoChatsMessage />
             ) : (
                 store.users.map(({ name, gender }, index: number) => {
-                    const randomNum: string = Math.floor(Math.random() * 1000).toString()
-                    const key: string = name + randomNum + gender
-                    if (name !== store.user?.name){
+                    if (name !== store.user?.name) {
+                        const key = name + gender + index
                         return (
                             <ChatPreview
                                 key={key}
@@ -27,7 +26,6 @@ const ChatSideBar: React.FC = () => {
                             />
                         )
                     }
-
                 })
             )}
         </div>

@@ -80,7 +80,6 @@ class WebsocketInstance {
                         store.messages.push(parsedEventData)
                     }
                 })
-
             }
             this.socketChat.onerror = (event: Event) => {
                 console.error(event)
@@ -90,9 +89,14 @@ class WebsocketInstance {
 
     sendMessage(message: string): void {
         this.socketChat?.send(
-            `'${ JSON.stringify({ type: 'message', senderId: store.user?.name, text: message, file: store.outFile })}'`
+            `'${JSON.stringify({
+                type: 'message',
+                senderId: store.user?.name,
+                text: message,
+                file: store.outFile,
+                date: new Date(),
+            })}'`
         )
-        localStorage.setItem('messages', JSON.stringify(store.messages))
         runInAction(() => {
             store.outFile = undefined
         })
@@ -105,8 +109,6 @@ class WebsocketInstance {
             })
         )
     }
-
-
 }
 
 export const websocketInstance = new WebsocketInstance()

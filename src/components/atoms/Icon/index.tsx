@@ -10,6 +10,7 @@ import noChatsIcon from '../../../assets/no-chats-icon.svg'
 import profileIcon from '../../../assets/header-profile-icon.svg'
 import arrowBackIcon from '../../../assets/back-arrow-icon.svg'
 import loadingIcon from '../../../assets/loading-icon.svg'
+import fileIcon from '../../../assets/file-icon.svg'
 import './style.scss'
 
 interface Icon {
@@ -24,6 +25,7 @@ interface Icon {
         | 'header-profile'
         | 'arrow-back'
         | 'loading'
+        | 'file'
         | string
 }
 
@@ -53,7 +55,8 @@ const Icon: React.FC<Icon> = ({ type }) => {
                 <img className={'header-profile'} src={profileIcon} alt={'profile icon'} />
             )}
             {type === 'arrow-back' && <img src={arrowBackIcon} alt="arrow back icon" />}
-            {type === 'loading' && <img src={loadingIcon} alt='loading icon' />}
+            {type === 'loading' && <img src={loadingIcon} alt="loading icon" />}
+            {type === 'file' && <img src={fileIcon} alt="file icon" />}
         </>
     )
 }
