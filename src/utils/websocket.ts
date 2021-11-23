@@ -75,11 +75,10 @@ class WebsocketInstance {
                     localStorage.removeItem('token')
                 }
                 const parsedEventData = JSON.parse(event.data.slice(1, -1))
-                runInAction(() => {
-                    if (parsedEventData.type === 'message') {
-                        store.messages.push(parsedEventData)
-                    }
-                })
+                if (parsedEventData.type === 'message') {
+                    store.addMessageToStore(parsedEventData)
+                    store.saveMessagesLocalStore()
+                }
             }
             this.socketChat.onerror = (event: Event) => {
                 console.error(event)

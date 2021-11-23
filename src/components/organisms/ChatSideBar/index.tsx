@@ -5,11 +5,14 @@ import NoChatsMessage from '../../molecules/NoChatsMessage'
 import { store } from '../../../stores/store'
 import './style.scss'
 
-const ChatSideBar: React.FC = () => {
+interface ChatSideBar {
+    openMessagesMobile: () => void
+}
+
+const ChatSideBar: React.FC<ChatSideBar> = ({ openMessagesMobile }) => {
     const handleSidebarClick = (): void => {
         store.closeMessages()
     }
-
     return (
         <div className={'chat-sidebar'} onClick={handleSidebarClick}>
             {!store.users || store.users.length === 1 ? (
@@ -25,8 +28,9 @@ const ChatSideBar: React.FC = () => {
                                 name={name}
                                 gender={gender}
                                 selectedChat={store.selectedChat}
-                                text={"I'll show you who's the boss of this gym."}
-                                isOutgoing={true}
+                                text={'No messages yet'}
+                                isOutgoing={false}
+                                openMessagesMobile={openMessagesMobile}
                             />
                         )
                     }

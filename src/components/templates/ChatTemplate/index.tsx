@@ -26,7 +26,7 @@ const ChatTemplate: React.FC<ChatTemplate> = ({ isSuspended = false }) => {
         'chat-template__chat': true,
         'chat-template__chat_visible': isChatVisible,
     })
-    const openMessages = (): void => {
+    const openMessagesMobile = (): void => {
         if (window.innerWidth <= 600) {
             setChatVisible(true)
             setSideBarHidden(true)
@@ -49,8 +49,8 @@ const ChatTemplate: React.FC<ChatTemplate> = ({ isSuspended = false }) => {
         <>
             {!isHeaderHidden && <ChatHeader />}
             <div className={'chat-template'}>
-                <div className={sideBarClass} onClick={openMessages}>
-                    {!isSuspended && <ChatSideBar />}
+                <div className={sideBarClass}>
+                    {!isSuspended && <ChatSideBar openMessagesMobile={openMessagesMobile} />}
                 </div>
                 <div className={chatClass}>
                     {isSuspended && (

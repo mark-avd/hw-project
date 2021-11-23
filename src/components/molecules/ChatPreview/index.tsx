@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
-import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import Icon from '../../atoms/Icon'
 import Text2 from '../../atoms/Text2'
@@ -15,6 +14,7 @@ interface ChatPreview {
     selectedChat: number | undefined
     text: string
     isOutgoing: boolean
+    openMessagesMobile: () => void
 }
 
 const ChatPreview: React.FC<ChatPreview> = ({
@@ -24,12 +24,26 @@ const ChatPreview: React.FC<ChatPreview> = ({
     selectedChat,
     isOutgoing,
     gender,
+    openMessagesMobile,
 }) => {
     const [isActive, setActive] = useState<boolean>(false)
     const chatPreviewClass = classNames({
         'chat-preview': true,
         'chat-preview_active': isActive,
     })
+
+    const handleCLick = (event: React.MouseEvent<HTMLDivElement>) => {
+        openMessagesMobile()
+        event.stopPropagation()
+        store.openMessages(chatId, name, gender)
+        if (!websocketInstance.socketChat) {
+            websocketInstance.chatConnect()
+        }
+        if (localStorage.getItem('messages')) {
+            const messages = localStorage.getItem('messages')
+            messages && store.setMessagesStore(JSON.parse(messages))
+        }
+    }
 
     useEffect(() => {
         if (window.innerWidth > 600) {
@@ -42,23 +56,7 @@ const ChatPreview: React.FC<ChatPreview> = ({
     }
 
     return (
-        <div
-            className={chatPreviewClass}
-            onClick={(event: React.MouseEvent<HTMLDivElement>) => {
-                event.stopPropagation()
-                store.openMessages(chatId, name, gender)
-                if (!websocketInstance.socketChat) {
-                    websocketInstance.chatConnect()
-                }
-                if (localStorage.getItem('messages')) {
-                    const mes = localStorage.getItem('messages')
-                    mes &&
-                        runInAction(() => {
-                            store.messages = JSON.parse(mes)
-                        })
-                }
-            }}
-        >
+        <div className={chatPreviewClass} onClick={handleCLick}>
             <div className={'chat-preview__user-icon'}>
                 <Icon type={gender} />
             </div>

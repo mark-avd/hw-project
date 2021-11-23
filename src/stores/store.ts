@@ -23,6 +23,19 @@ class Store {
         this.selectedChat = undefined
         this.person = undefined
     }
+
+    addMessageToStore(message: MessageInterface) {
+        this.messages.push(message)
+    }
+
+    setMessagesStore(messages: Array<MessageInterface>) {
+       this.messages = messages
+    }
+
+    saveMessagesLocalStore() {
+        localStorage.setItem('messages', JSON.stringify(store.messages))
+    }
+
 }
 
 export const store = new Store()
