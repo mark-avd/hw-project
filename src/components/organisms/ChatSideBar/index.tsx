@@ -6,8 +6,12 @@ import { store } from '../../../stores/store'
 import './style.scss'
 
 const ChatSideBar: React.FC = () => {
+    const handleSidebarClick = (): void => {
+        store.closeMessages()
+    }
+
     return (
-        <div className={'chat-sidebar'}>
+        <div className={'chat-sidebar'} onClick={handleSidebarClick}>
             {!store.users || store.users.length === 1 ? (
                 <NoChatsMessage />
             ) : (

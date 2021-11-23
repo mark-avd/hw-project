@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { runInAction } from 'mobx'
 import Input from '../../atoms/Input'
@@ -14,6 +14,7 @@ interface ChatInputArea {
 }
 
 const ChatInputArea: React.FC = () => {
+    const [isDisabled, setDisabled] = useState<boolean>(false)
     const hiddenFileInput = useRef<HTMLInputElement>(null)
     const { register, handleSubmit, reset } = useForm<ChatInputArea>()
 
@@ -23,6 +24,7 @@ const ChatInputArea: React.FC = () => {
 
     const fileInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
+            setDisabled(true)
             const file = event.target.files[0]
             const formData = new FormData()
             formData.append('0', file)
@@ -40,6 +42,7 @@ const ChatInputArea: React.FC = () => {
                         url: BASE_URL + fileUrl,
                     }
                 })
+                setDisabled(false)
             }
             if (response.status === 400) {
                 const error = await response.text()
@@ -80,8 +83,8 @@ const ChatInputArea: React.FC = () => {
                     />
                 </div>
                 <div className={'chat-input-area__send-icon'}>
-                    <button>
-                        <Icon type={'send'} />
+                    <button disabled={isDisabled}>
+                        {isDisabled ? <Icon type={'disabled-send'} /> : <Icon type={'send'} />}
                     </button>
                 </div>
             </div>

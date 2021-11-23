@@ -6,6 +6,7 @@ import maleIcon from '../../../assets/user-icon-male.svg'
 import femaleIcon from '../../../assets/user-icon-female.svg'
 import errorIcon from '../../../assets/error-input-icon.svg'
 import sendIcon from '../../../assets/send-icon.svg'
+import disabledSendIcon from '../../../assets/disabled-send-icon.svg'
 import noChatsIcon from '../../../assets/no-chats-icon.svg'
 import profileIcon from '../../../assets/header-profile-icon.svg'
 import arrowBackIcon from '../../../assets/back-arrow-icon.svg'
@@ -26,6 +27,7 @@ interface Icon {
         | 'arrow-back'
         | 'loading'
         | 'file'
+        | 'disabled-send'
         | string
 }
 
@@ -57,6 +59,7 @@ const Icon: React.FC<Icon> = ({ type }) => {
             {type === 'arrow-back' && <img src={arrowBackIcon} alt="arrow back icon" />}
             {type === 'loading' && <img src={loadingIcon} alt="loading icon" />}
             {type === 'file' && <img src={fileIcon} alt="file icon" />}
+            {type === 'disabled-send' && <img src={disabledSendIcon} alt="disabled send icon" />}
         </>
     )
 }

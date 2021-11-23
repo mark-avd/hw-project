@@ -18,6 +18,11 @@ class Store {
         this.selectedChat = chatId
         this.person = { name, gender }
     }
+
+    closeMessages(): void {
+        this.selectedChat = undefined
+        this.person = undefined
+    }
 }
 
 export const store = new Store()

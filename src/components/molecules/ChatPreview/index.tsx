@@ -44,7 +44,8 @@ const ChatPreview: React.FC<ChatPreview> = ({
     return (
         <div
             className={chatPreviewClass}
-            onClick={() => {
+            onClick={(event: React.MouseEvent<HTMLDivElement>) => {
+                event.stopPropagation()
                 store.openMessages(chatId, name, gender)
                 if (!websocketInstance.socketChat) {
                     websocketInstance.chatConnect()

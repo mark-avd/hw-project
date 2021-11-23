@@ -4,13 +4,13 @@ import classNames from 'classnames'
 import './style.scss'
 
 interface Input {
-    optionList?: []
-    select?: boolean
-    name?: string
     placeholder: string
+    name?: string
     type?: string
+    select?: boolean
     isError?: boolean
     noBorder?: boolean
+    optionList?: []
     register?: UseFormRegisterReturn
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
